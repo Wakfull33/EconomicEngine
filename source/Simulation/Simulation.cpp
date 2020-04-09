@@ -1,5 +1,5 @@
-#include "Simulation.h"
-#include "Entity.h"
+#include "Simulation/Simulation.h"
+#include "Core/Entity.h"
 #include <iostream>
 
 

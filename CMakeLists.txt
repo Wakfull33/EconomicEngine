@@ -37,7 +37,10 @@ set (SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_auto_type)
-target_include_directories(${PROJECT_NAME} PUBLIC
-    "."
-    ${HEADER_DIR}
+target_include_directories(${PROJECT_NAME} 
+  PUBLIC
+    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${HEADER_DIR}>
+  PRIVATE
+    $<BUILD_INTERFACE:${SOURCE_DIR}>
 )

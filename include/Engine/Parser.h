@@ -1,11 +1,10 @@
 #pragma once
-#include "Entity.h"
 #include <string>
 #include <fstream>
 #include <vector>
 #include <map>
 
-
+class Entity;
 class Simulation;
 class Parser {
 

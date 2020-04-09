@@ -1,6 +1,8 @@
 #pragma once
-#include "Entity.h"
-#include "Job.h"
+
+#include "Core/Entity.h"
+
+class Job;
 
 class Agent : public Entity{
 

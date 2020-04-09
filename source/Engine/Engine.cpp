@@ -1,6 +1,6 @@
-#include "Engine.h"
-#include "Simulation.h"
-#include "Parser.h"
+#include "Engine/Engine.h"
+#include "Engine/Parser.h"
+#include "Simulation/Simulation.h"
 
 
 Engine::Engine() {

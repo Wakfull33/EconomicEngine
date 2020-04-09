@@ -1,4 +1,4 @@
-#include "Entity.h"
+#include "Core/Entity.h"
 
 Entity::~Entity() {
 }
