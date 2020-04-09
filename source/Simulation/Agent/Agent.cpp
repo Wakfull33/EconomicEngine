@@ -13,6 +13,3 @@ void Agent::Begin() {
 void Agent::Update(float dt) {
 }
 
-//Agent * Agent::CreateFarmer() {
-//	return nullptr;
-//}
