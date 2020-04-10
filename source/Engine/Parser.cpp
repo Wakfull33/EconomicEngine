@@ -1,7 +1,4 @@
 #include "Engine/Parser.h"
-#include "Engine/EngineFactory.h"
-#include "Simulation/Jobs/Implementations/Farmer.h"
-#include "Simulation/Jobs/Implementations/WoodCutter.h"
 #include "Simulation/Agent/Agent.h"
 #include "Simulation/Simulation.h"
 #include <iostream>
@@ -48,7 +45,6 @@ void Parser::InitSimulationFromData(Simulation * EconomicSimulation) {
 	if (EconomicSimulation != nullptr) {
 		EngineFactory<Entity>::GetRegistry();
 		RegisterEntities();
-		
 	}
 	
 	

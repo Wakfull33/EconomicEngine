@@ -9,44 +9,20 @@ set (SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source)
 
 set (HEADERS
     ${HEADER_DIR}/Core/Signal.h
-    ${HEADER_DIR}/Core/Entity.h
-    ${HEADER_DIR}/Core/GameObject.h
     ${HEADER_DIR}/Engine/Engine.h
     ${HEADER_DIR}/Engine/Parser.h
-    ${HEADER_DIR}/Engine/EngineFactory.h
     ${HEADER_DIR}/Engine/json.hpp
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
-    ${HEADER_DIR}/Simulation/Global/God.h
-	${HEADER_DIR}/Simulation/Items/Item.h
-    ${HEADER_DIR}/Simulation/Items/Food.h
-    ${HEADER_DIR}/Simulation/Items/Wood.h
-    ${HEADER_DIR}/Simulation/Items/Tools/Hoe.h
-    ${HEADER_DIR}/Simulation/Items/Tools/Axe.h
-    ${HEADER_DIR}/Simulation/Items/Tools/Tool.h
-    ${HEADER_DIR}/Simulation/Jobs/Base/Job.h
-    ${HEADER_DIR}/Simulation/Jobs/Implementations/Farmer.h
-    ${HEADER_DIR}/Simulation/Jobs/Implementations/WoodCutter.h
+    ${HEADER_DIR}/Simulation/Agent/AgentManager.h
 )
 
 set (SOURCES
-    ${SOURCE_DIR}/Core/Signal.cpp
-    ${SOURCE_DIR}/Core/Entity.cpp
-    ${SOURCE_DIR}/Core/GameObject.cpp
     ${SOURCE_DIR}/Engine/Engine.cpp
     ${SOURCE_DIR}/Engine/Parser.cpp
-	${SOURCE_DIR}/Simulation/Simulation.cpp
+    ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
-	${SOURCE_DIR}/Simulation/Global/God.cpp
-    ${SOURCE_DIR}/Simulation/Items/Item.cpp
-    ${SOURCE_DIR}/Simulation/Items/Food.cpp
-    ${SOURCE_DIR}/Simulation/Items/Wood.cpp
-	${SOURCE_DIR}/Simulation/Items/Tools/Hoe.cpp
-	${SOURCE_DIR}/Simulation/Items/Tools/Axe.cpp
-	${SOURCE_DIR}/Simulation/Items/Tools/Tool.cpp
-	${SOURCE_DIR}/Simulation/Jobs/Base/Job.cpp
-    ${SOURCE_DIR}/Simulation/Jobs/Implementations/Farmer.cpp
-    ${SOURCE_DIR}/Simulation/Jobs/Implementations/WoodCutter.cpp
+    ${SOURCE_DIR}/Simulation/Agent/AgentManager.cpp
     EconomicEngine.cpp
 )
 

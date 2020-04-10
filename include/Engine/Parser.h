@@ -4,7 +4,6 @@
 #include <vector>
 #include <map>
 
-class Entity;
 class Simulation;
 class Parser {
 
@@ -28,7 +27,6 @@ public:
 
 private:
 	
-	int* s;
 	std::string FilePath;
 	std::ifstream Reader;
 	std::ofstream Writer;

@@ -17,7 +17,7 @@ public:
 	
 	bool SimulationActive;
 	int NbrCycles;
-	std::vector<Entity> Entities;
+	//std::vector<Entity> Entities;
 
 ////////FONCTIONS//////////
 ///

@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 
-template<typename ... Args>
+template<typename ...Args>
 class Signal {
 
 public:
