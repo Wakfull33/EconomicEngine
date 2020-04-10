@@ -19,6 +19,7 @@ public:
 		}
 		return Registry;
 	}
+	
 	static T* CreateEntity(std::string& Name) {
 		typename std::map<std::string, T*(*)()>::iterator it = GetRegistry()->find(Name);
 		if (it != GetRegistry()->end()) {
@@ -26,6 +27,7 @@ public:
 		}
 		return nullptr;
 	}
+	
 	static void Register(std::string& Name, T*(*func)()) {
 		GetRegistry()->insert(std::make_pair(Name, func));
 	}
