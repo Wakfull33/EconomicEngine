@@ -17,6 +17,12 @@ set (HEADERS
     ${HEADER_DIR}/Engine/json.hpp
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
+	${HEADER_DIR}/Simulation/Items/Item.h
+    ${HEADER_DIR}/Simulation/Items/Food.h
+    ${HEADER_DIR}/Simulation/Items/Wood.h
+    ${HEADER_DIR}/Simulation/Items/Tools/Hoe.h
+    ${HEADER_DIR}/Simulation/Items/Tools/Axe.h
+    ${HEADER_DIR}/Simulation/Items/Tools/Tool.h
     ${HEADER_DIR}/Simulation/Jobs/Base/Job.h
     ${HEADER_DIR}/Simulation/Jobs/Implementations/Farmer.h
     ${HEADER_DIR}/Simulation/Jobs/Implementations/WoodCutter.h
@@ -28,9 +34,15 @@ set (SOURCES
     ${SOURCE_DIR}/Core/GameObject.cpp
     ${SOURCE_DIR}/Engine/Engine.cpp
     ${SOURCE_DIR}/Engine/Parser.cpp
-    ${SOURCE_DIR}/Simulation/Simulation.cpp
+	${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
-    ${SOURCE_DIR}/Simulation/Jobs/Base/Job.cpp
+    ${SOURCE_DIR}/Simulation/Items/Item.cpp
+    ${SOURCE_DIR}/Simulation/Items/Food.cpp
+    ${SOURCE_DIR}/Simulation/Items/Wood.cpp
+	${SOURCE_DIR}/Simulation/Items/Tools/Hoe.cpp
+	${SOURCE_DIR}/Simulation/Items/Tools/Axe.cpp
+	${SOURCE_DIR}/Simulation/Items/Tools/Tool.cpp
+	${SOURCE_DIR}/Simulation/Jobs/Base/Job.cpp
     ${SOURCE_DIR}/Simulation/Jobs/Implementations/Farmer.cpp
     ${SOURCE_DIR}/Simulation/Jobs/Implementations/WoodCutter.cpp
     EconomicEngine.cpp
