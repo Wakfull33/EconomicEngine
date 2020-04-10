@@ -5,7 +5,6 @@
 #include <vector>
 #include <map>
 
-class Entity;
 class Simulation;
 template <typename  T>
 class Parser {
@@ -31,7 +30,6 @@ public:
 
 private:
 	
-	int* s;
 	std::string FilePath;
 	std::ifstream Reader;
 	std::ofstream Writer;

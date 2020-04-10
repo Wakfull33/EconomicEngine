@@ -1,27 +1,19 @@
 #pragma once
+#include "Core/StructUtils.h"
+#include <vector>
 
-#include "Core/Entity.h"
-
-class Job;
-
-class Agent : public Entity{
+class Agent{
 
 public:
 
 	Agent() = default;
-	Agent(Job* job);
-	virtual ~Agent();
+	Agent(int _Job);
+	~Agent() = default;
 
-	virtual void Begin() override;
+	void DoJob();
 	
-	virtual void Update(float dt) override;
+	int Job;
+	std::vector<int> Inventory;
 	
-	template<class T>
-	static Agent* CreateAgentWithJob() {
-		Job* job = T::Get();
-		return new Agent(job);
-	}
-	
-	Job* AgentJob = nullptr;
 };
 

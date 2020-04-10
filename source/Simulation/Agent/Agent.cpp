@@ -1,16 +1,9 @@
 #include "Simulation/Agent/Agent.h"
-#include "Simulation/Jobs/Base/Job.h"
 
-Agent::Agent(Job* job)
-	: AgentJob(job){
+Agent::Agent(int _Job)
+	: Job(_Job){
 }
 
-Agent::~Agent() {
-}
-
-void Agent::Begin() {
-}
-
-void Agent::Update(float dt) {
+void Agent::DoJob() {
 }
 
