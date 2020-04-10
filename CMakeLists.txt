@@ -14,6 +14,7 @@ set (HEADERS
     ${HEADER_DIR}/Engine/Engine.h
     ${HEADER_DIR}/Engine/Parser.h
     ${HEADER_DIR}/Engine/EngineFactory.h
+    ${HEADER_DIR}/Engine/json.hpp
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
     ${HEADER_DIR}/Simulation/Jobs/Base/Job.h
