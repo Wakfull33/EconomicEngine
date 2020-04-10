@@ -17,6 +17,7 @@ set (HEADERS
     ${HEADER_DIR}/Engine/json.hpp
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
+    ${HEADER_DIR}/Simulation/Global/God.h
 	${HEADER_DIR}/Simulation/Items/Item.h
     ${HEADER_DIR}/Simulation/Items/Food.h
     ${HEADER_DIR}/Simulation/Items/Wood.h
@@ -36,6 +37,7 @@ set (SOURCES
     ${SOURCE_DIR}/Engine/Parser.cpp
 	${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
+	${SOURCE_DIR}/Simulation/Global/God.cpp
     ${SOURCE_DIR}/Simulation/Items/Item.cpp
     ${SOURCE_DIR}/Simulation/Items/Food.cpp
     ${SOURCE_DIR}/Simulation/Items/Wood.cpp

@@ -18,9 +18,9 @@ public:
 		DisconnectAll();
 		return *this;
 	}
-	
-	int Connect(void(*func)(Args...)) {
-		typename std::map<int, void(*)(Args...)>::iterartor it = Slots.find(func);
+	template<typename T>
+	int Connect(void(T::*func)(Args...)) {
+		typename std::map<int, void(*)(Args...)>::iterator it = Slots.find(func);
 		if (it == Slots.end()) {
 			CurrentId++;
 			Slots.insert(std::make_pair(CurrentId, func));
