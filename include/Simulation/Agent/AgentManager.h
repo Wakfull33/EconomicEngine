@@ -1,6 +1,5 @@
 #pragma once
 #include "Core/StructUtils.h"
-#include <map>
 #include <vector>
 
 class Agent;

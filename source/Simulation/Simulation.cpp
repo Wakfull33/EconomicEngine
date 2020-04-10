@@ -7,7 +7,7 @@ Simulation::Simulation()
 }
 
 Simulation::Simulation(Time _Clock)
-	: Clock(_Clock), DeltaTime(0.0f), SimulationActive(false), NbrCycles(10), /*Entities(std::vector<Entity>())*/{
+	: Clock(_Clock), DeltaTime(0.0f), SimulationActive(false), NbrCycles(10)/*Entities(std::vector<Entity>())*/{
 }
 
 Simulation::~Simulation() {

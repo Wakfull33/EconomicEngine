@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include <map>
 
 class Simulation;
 class Parser {

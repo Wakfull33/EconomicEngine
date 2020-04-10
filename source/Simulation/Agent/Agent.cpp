@@ -5,5 +5,6 @@ Agent::Agent(int _Job)
 }
 
 void Agent::DoJob() {
+	//TODO thomas
 }
 

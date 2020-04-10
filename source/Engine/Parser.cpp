@@ -34,17 +34,16 @@ Parser& Parser::operator=(const Parser & CopyParser) {
 }
 
 void Parser::RegisterEntities() const{
-	std::string WoodCutterName = "Bucheron";
-	EngineFactory<Agent>::Register(WoodCutterName, &Agent::CreateAgentWithJob<WoodCutter>);
-	std::string FarmerName = "Fermier";
-	EngineFactory<Agent>::Register(FarmerName, &Agent::CreateAgentWithJob<Farmer>);
+	//std::string WoodCutterName = "Bucheron";
+	//EngineFactory<Agent>::Register(WoodCutterName, &Agent::CreateAgentWithJob<WoodCutter>);
+	//std::string FarmerName = "Fermier";
+	//EngineFactory<Agent>::Register(FarmerName, &Agent::CreateAgentWithJob<Farmer>);
 }
 
 void Parser::InitSimulationFromData(Simulation * EconomicSimulation) {
 
 	if (EconomicSimulation != nullptr) {
-		EngineFactory<Entity>::GetRegistry();
-		RegisterEntities();
+		
 	}
 	
 	
