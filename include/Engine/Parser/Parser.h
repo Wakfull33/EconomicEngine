@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Core/StructUtils.h"
-#include "Simulation/Agent/AgentManager.h"
 #include "Core/GameplayStatics.h"
 #include "Simulation/Global/GameMode.h"
+#include "Simulation/ObjectManager.h"
 #include <iostream>
 
 
@@ -30,9 +30,9 @@ public:
 	static void RegisterParametersFromData(DataModel& Model){
 		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
 		SimulationGameMode->NbrCycles = Model.NombreCycles;
-		SimulationGameMode->AgentsManager = new AgentManager();
-		for (auto& AgentModel : Model.AgentModels){
-			AgentManager::Register(AgentModel);
+		SimulationGameMode->AgentsManager = new ObjectManager<AgentModel>;
+		for (auto& _AgentModel : Model.AgentModels){
+			ObjectManager<AgentModel>::Register(_AgentModel);
 		}
 		
 	}
