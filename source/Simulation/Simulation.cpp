@@ -1,5 +1,7 @@
 #include "Simulation/Simulation.h"
 #include <iostream>
+#include "Engine/Parser/Parser.h"
+#include "Engine/Parser/Json.h"
 
 
 Simulation::Simulation()
@@ -14,7 +16,16 @@ Simulation::~Simulation() {
 	//Entities.clear();
 }
 
+void Simulation::InitSimulation(){
+	DataModel Result = Parser<Json>::Read("Data.json");
+	Parser<Json>::RegisterSimulationParameters(this, Result);
+}
+
 void Simulation::ConsummeCycle() {
+
+
+	
+	
 	//const std::chrono::duration<float> Duration = std::chrono::steady_clock::now() - Clock;
 	//Clock = std::chrono::steady_clock::now();
 	//DeltaTime = Duration.count();
@@ -29,4 +40,9 @@ void Simulation::ConsummeCycle() {
 	//if (NbrCycles <= 0) {
 	//	SimulationActive = false;
 	//}
+}
+
+void Simulation::EndSimulation(){
+
+
 }

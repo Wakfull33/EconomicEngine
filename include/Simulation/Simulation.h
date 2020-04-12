@@ -4,27 +4,29 @@
 
 using Time = std::chrono::time_point<std::chrono::steady_clock>;
 
-class Entity;
+class AgentManager;
 
 class Simulation {
 
 public:
 
-////////VARIABLES///////////
-	
+	////////VARIABLES///////////
+
 	Time Clock;
 	float DeltaTime;
-	
-	bool SimulationActive;
-	int NbrCycles;
-	//std::vector<Entity> Entities;
 
-////////FONCTIONS//////////
-///
+	bool SimulationActive;
+	unsigned int NbrCycles;
+	AgentManager* SimulationAgentManager;
+
+	////////FONCTIONS//////////
+	///
 	Simulation();
 	Simulation(Time _Clock);
 	~Simulation();
-	
+
+	void InitSimulation();
 	void ConsummeCycle();
+	void EndSimulation();
 };
 
