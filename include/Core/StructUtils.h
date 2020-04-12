@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 struct Production {
 	int Item;
@@ -24,4 +25,11 @@ struct AgentModel {
 	Production AgentProd;
 	Consommation AgentConsummation;
 	JobTool AgentJobTool;
+};
+
+struct DataModel {
+	std::vector<AgentModel> AgentModels;
+	std::vector<int> NbrAgentsPerModels;
+	unsigned int NombreCycles;
+	
 };

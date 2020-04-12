@@ -9,9 +9,11 @@ set (SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source)
 
 set (HEADERS
     ${HEADER_DIR}/Core/Signal.h
+    ${HEADER_DIR}/Core/StructUtils.h
     ${HEADER_DIR}/Engine/Engine.h
-    ${HEADER_DIR}/Engine/Parser.h
-    ${HEADER_DIR}/Engine/json.hpp
+    ${HEADER_DIR}/Engine/Parser/Parser.h
+    ${HEADER_DIR}/Engine/Parser/Json.h
+    ${HEADER_DIR}/Engine/Parser/Librairy/json.hpp
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
     ${HEADER_DIR}/Simulation/Agent/AgentManager.h
@@ -19,7 +21,7 @@ set (HEADERS
 
 set (SOURCES
     ${SOURCE_DIR}/Engine/Engine.cpp
-    ${SOURCE_DIR}/Engine/Parser.cpp
+    ${SOURCE_DIR}/Engine/Parser/Json.cpp
     ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
     ${SOURCE_DIR}/Simulation/Agent/AgentManager.cpp
