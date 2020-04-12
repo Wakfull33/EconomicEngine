@@ -1,0 +1,24 @@
+{
+    "init_list": [
+        {
+            "class": "farmer",
+            "quantity": 200000
+        },
+        {
+            "class": "miner",
+            "quantity": 2
+        },
+        {
+            "class": "refiner",
+            "quantity": 2
+        },
+        {
+            "class": "woodcutter",
+            "quantity": 2
+        },
+        {
+            "class": "blacksmith",
+            "quantity": 2
+        }
+    ]
+}
