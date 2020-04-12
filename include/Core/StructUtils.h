@@ -18,7 +18,6 @@ struct JobTool {
 	float BreakingChance;
 };
 
-
 struct AgentModel {
 	std::string JobName;
 	Production AgentProd;
