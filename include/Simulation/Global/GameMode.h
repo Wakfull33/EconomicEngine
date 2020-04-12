@@ -1,7 +1,8 @@
 #pragma once
+#include "Simulation/ObjectManager.h"
+#include "Core/StructUtils.h"
 #include <vector>
 
-class AgentManager;
 
 class GameMode {
 
@@ -10,7 +11,8 @@ public:
 	static GameMode* Get();
 
 	unsigned int NbrCycles = 0;
-	AgentManager* AgentsManager = nullptr;
+	ObjectManager<AgentModel>* AgentsManager = nullptr;
+	ObjectManager<ItemModel>* ItemsManager = nullptr;
 
 	
 private:

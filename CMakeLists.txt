@@ -16,10 +16,9 @@ set (HEADERS
     ${HEADER_DIR}/Engine/Parser/Json.h
     ${HEADER_DIR}/Engine/Parser/Librairy/json.hpp
     ${HEADER_DIR}/Simulation/Simulation.h
+    ${HEADER_DIR}/Simulation/ObjectManager.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
-    ${HEADER_DIR}/Simulation/Agent/AgentManager.h
     ${HEADER_DIR}/Simulation/Global/GameMode.h
-    ${HEADER_DIR}/Simulation/Item/ItemManager.h
 )
 
 set (SOURCES
@@ -28,9 +27,7 @@ set (SOURCES
     ${SOURCE_DIR}/Engine/Parser/Json.cpp
     ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
-    ${SOURCE_DIR}/Simulation/Agent/AgentManager.cpp
     ${SOURCE_DIR}/Simulation/Global/GameMode.cpp
-    ${SOURCE_DIR}/Simulation/Item/ItemManager.cpp
     EconomicEngine.cpp
 )
 
