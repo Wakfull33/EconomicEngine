@@ -1,7 +1,6 @@
 {
   "agentTypes":
-  {
-    "farmer":
+  [
     {
       "job": "Farmer",
       "produce": {"item":"food", "max":4, "min":2},
@@ -10,7 +9,6 @@
       "eat": false,
       "tool": {"needed":true, "breaking":0.1}
     },
-    "miner":
     {
       "job": "Miner",
       "produce": {"item":"ore", "max":4, "min":2},
@@ -19,7 +17,6 @@
       "eat": true,
       "tool": {"needed":true, "breaking":0.1}
     },
-    "refiner":
     {
       "job": "Refiner",
       "produce": {"item":"metal", "max":4, "min":2},
@@ -28,7 +25,6 @@
       "eat": true,
       "tool": {"needed":true, "breaking":0.1}
     },
-    "woodcutter":
     {
       "job": "Woodcutter",
       "produce": {"item":"wood", "max":2, "min":1},
@@ -37,7 +33,6 @@
       "eat": true,
       "tool": {"needed":true, "breaking":0.1}
     },
-    "blacksmith":
     {
       "job": "Blacksmith",
       "produce": {"item":"tool", "max":0, "min":0},
@@ -46,8 +41,8 @@
       "eat": true,
       "tool": {"needed":true, "breaking":0.1}
     }
-  },
-  "itemTypes":{
+  ],
+  "itemTypes":[
 
-  }
+  ]
 }
