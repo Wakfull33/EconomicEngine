@@ -11,11 +11,10 @@ public:
 
 	static void Register(AgentModel& NewAgent);
 
-	void CreateNewAgent(int Job);
+	Agent* CreateNewAgent(int Job);
 	
 private:
 	
 	static std::vector<AgentModel> AgentRegistry;
-	std::vector<Agent*> Agents;
 };
 

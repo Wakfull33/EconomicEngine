@@ -1,20 +1,20 @@
 #include "Engine/Engine.h"
-#include "Engine/Parser.h"
 #include "Simulation/Simulation.h"
+#include "Core/GameplayStatics.h"
+#include "Engine/Parser/Json.h"
+#include "Engine/Parser/Parser.h"
 
 
 Engine::Engine() {
-	EngineParser = new Parser("Data.csv");
 }
 
 Engine::~Engine() {
-	delete EngineParser;
-	EngineParser = nullptr;
 }
 
 Simulation* Engine::CreateSimulation() {
 	Simulation* EconomicSimulation = new Simulation(std::chrono::steady_clock::now());
-	EngineParser->InitSimulationFromData(EconomicSimulation);
+	GamePlayStatics::SetSimulation(EconomicSimulation);
+	Parser<Json>::InitSimulationFromFile(EconomicSimulation, "TODO");
 	EconomicSimulation->SimulationActive = true;
 	return EconomicSimulation;
 }

@@ -9,17 +9,17 @@ Simulation::Simulation()
 }
 
 Simulation::Simulation(Time _Clock)
-	: Clock(_Clock), DeltaTime(0.0f), SimulationActive(false), NbrCycles(10)/*Entities(std::vector<Entity>())*/{
+	: Clock(_Clock), DeltaTime(0.0f), SimulationActive(false){
 }
 
 Simulation::~Simulation() {
 	//Entities.clear();
 }
 
-void Simulation::InitSimulation(){
-	DataModel Result = Parser<Json>::Read("Data.json");
-	Parser<Json>::RegisterSimulationParameters(this, Result);
-}
+//void Simulation::InitSimulation(){
+//	DataModel Result = Parser<Json>::Read("Data.json");
+//	Parser<Json>::RegisterGameModeParameters(this, Result);
+//}
 
 void Simulation::ConsummeCycle() {
 

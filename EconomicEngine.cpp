@@ -12,9 +12,9 @@ int main()
 {
 	Engine* EconomicEngine = new Engine();
 	Simulation* EconomicSimulation = EconomicEngine->CreateSimulation();
-	while (EconomicSimulation->SimulationActive) {
-		EconomicSimulation->ConsummeCycle();
-	}
+	//while (EconomicSimulation->SimulationActive) {
+		//EconomicSimulation->ConsummeCycle();
+	//}
 	//TODO Simulation Output
 	delete EconomicSimulation;
 	delete EconomicEngine;

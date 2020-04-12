@@ -5,6 +5,7 @@
 using Time = std::chrono::time_point<std::chrono::steady_clock>;
 
 class AgentManager;
+class Agent;
 
 class Simulation {
 
@@ -16,8 +17,7 @@ public:
 	float DeltaTime;
 
 	bool SimulationActive;
-	unsigned int NbrCycles;
-	AgentManager* SimulationAgentManager;
+	std::vector<Agent*> Agents;
 
 	////////FONCTIONS//////////
 	///
@@ -25,7 +25,6 @@ public:
 	Simulation(Time _Clock);
 	~Simulation();
 
-	void InitSimulation();
 	void ConsummeCycle();
 	void EndSimulation();
 };

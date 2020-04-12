@@ -10,6 +10,7 @@ set (SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/source)
 set (HEADERS
     ${HEADER_DIR}/Core/Signal.h
     ${HEADER_DIR}/Core/StructUtils.h
+    ${HEADER_DIR}/Core/GameplayStatics.h
     ${HEADER_DIR}/Engine/Engine.h
     ${HEADER_DIR}/Engine/Parser/Parser.h
     ${HEADER_DIR}/Engine/Parser/Json.h
@@ -17,14 +18,19 @@ set (HEADERS
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
     ${HEADER_DIR}/Simulation/Agent/AgentManager.h
+    ${HEADER_DIR}/Simulation/Global/GameMode.h
+    ${HEADER_DIR}/Simulation/Item/ItemManager.h
 )
 
 set (SOURCES
+    ${SOURCE_DIR}/Core/GameplayStatics.cpp
     ${SOURCE_DIR}/Engine/Engine.cpp
     ${SOURCE_DIR}/Engine/Parser/Json.cpp
     ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
     ${SOURCE_DIR}/Simulation/Agent/AgentManager.cpp
+    ${SOURCE_DIR}/Simulation/Global/GameMode.cpp
+    ${SOURCE_DIR}/Simulation/Item/ItemManager.cpp
     EconomicEngine.cpp
 )
 

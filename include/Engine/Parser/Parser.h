@@ -2,6 +2,8 @@
 
 #include "Core/StructUtils.h"
 #include "Simulation/Agent/AgentManager.h"
+#include "Core/GameplayStatics.h"
+#include "Simulation/Global/GameMode.h"
 #include <iostream>
 
 
@@ -15,24 +17,29 @@ public:
 	~Parser(){	
 	}
 
-	static DataModel Read(std::string FilePath){
-		return T::Read(FilePath);
+	static void InitSimulationFromFile(Simulation* _Simulation, std::string FilePath){
+		DataModel SimulationModel = T::Read(FilePath);
+		RegisterParametersFromData(SimulationModel);
+		CreateSimulationAgents(_Simulation, SimulationModel);
 	}
 
-	static DataModel Write(std::string FilePath) {
-		return T::Write(FilePath);
+	static void Write(std::string FilePath) {
+		//TODO
 	}
 	
-	static void RegisterSimulationParameters(Simulation* Simulation, DataModel& Model){
-		Simulation->NbrCycles = Model.NombreCycles;
-		Simulation->SimulationAgentManager = new AgentManager();
+	static void RegisterParametersFromData(DataModel& Model){
+		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
+		SimulationGameMode->NbrCycles = Model.NombreCycles;
+		SimulationGameMode->AgentsManager = new AgentManager();
 		for (auto& AgentModel : Model.AgentModels){
 			AgentManager::Register(AgentModel);
 		}
-		// ici dois faire la loop
+		
 	}
 
-	
+	static void CreateSimulationAgents(Simulation* _Simulation, DataModel& Model) {
+		//TODO Titi
+	}
 	
 };
 

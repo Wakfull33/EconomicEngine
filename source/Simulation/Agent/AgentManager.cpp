@@ -5,7 +5,6 @@
 std::vector<AgentModel> AgentManager::AgentRegistry = std::vector<AgentModel>();
 
 AgentManager::~AgentManager() {
-	Agents.clear();
 }
 
 void AgentManager::Register(AgentModel& NewAgent) {
@@ -15,9 +14,8 @@ void AgentManager::Register(AgentModel& NewAgent) {
 	}
 }
 
-void AgentManager::CreateNewAgent(int Job){
-	Agent* NewAgent = new Agent(Job);
-	Agents.push_back(NewAgent);
+Agent* AgentManager::CreateNewAgent(int Job){
+	return new Agent(Job);
 }
 
 
