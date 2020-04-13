@@ -14,11 +14,23 @@ public:
 		}
 	}
 	static T& GetObject(int index) {
-		return AgentRegistry[index];
+		return ObjectRegistry[index];
 	}
 
 	static int GetRegistrySize() {
-		return AgentRegistry.size();
+		return ObjectRegistry.size();
+	}
+
+	static void UpdateObject(int index, T Element) {
+		ObjectRegistry[index] = Element;
+		//TODO Benoit Save Actual registry if update is temporary
+	}
+
+	static void UpdateObjects(std::vector<T>& Elements) {
+		for (auto& Element : Elements) {
+			//TODO Benoit Replace Element in registry
+			//TODO Benoit Save Actual registry if update is temporary
+		}
 	}
 
 private:

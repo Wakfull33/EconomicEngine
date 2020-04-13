@@ -3,8 +3,15 @@
 
 Event::Event(int Id)
 	: EventId(Id){
+	//TODO get gamemode
 }
 
-void Event::BroadCast(std::any& Params) {
-	EventSignal.BroadCast(Params);
+bool Event::CanHappen() {
+	return false;
+	//TODO check it the right cycle
 }
+
+void Event::BroadCast() {
+	//TODO broadcast signal with information
+}
+
