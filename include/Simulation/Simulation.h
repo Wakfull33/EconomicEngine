@@ -13,7 +13,7 @@ public:
 
 	////////VARIABLES///////////
 
-	Time Clock;
+	float Clock;
 	float DeltaTime;
 
 	bool SimulationActive;

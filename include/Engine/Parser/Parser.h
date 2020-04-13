@@ -39,6 +39,8 @@ public:
 
 	static void CreateSimulationAgents(Simulation* _Simulation, DataModel& Model) {
 		//TODO Titi
+		float clockTime = dynamic_cast<auto>(_Simulation->Clock);
+		
 	}
 	
 };
