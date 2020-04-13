@@ -1,28 +1,38 @@
 #include "Engine/Parser/Json.h"
 #include <fstream>
 
-Json::Json()
-{
+Json::Json(){
 }
 
-Json::~Json()
-{
+Json::~Json(){
 }
 
-bool Json::IsFileValid(std::string FileName)
-{
+bool Json::IsFileValid(std::string FileName){
 	return false;
 }
 
-DataModel Json::Read(std::string Path)
-{
+DataModel Json::Read(std::string Path){
 	
 	jsonObject j_AgentTypes;
 	std::ifstream in(Path);
-	DataModel model;
-	if (!in.fail())
-	{
-		
+	DataModel dataModel;
+	if (!in.fail()){
+		auto AgentTypes = j_AgentTypes["agentTypes"];
+		for (int i = 0 ; i <AgentTypes.size(); i++){
+			AgentModel agentModel;
+			agentModel.JobName = AgentTypes.at(i)["job"];
+			agentModel.AgentProd = {
+				0,AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]
+			};
+			agentModel.AgentConsummation = {
+				0,AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]
+			};
+			agentModel.AgentJobTool = {
+				0,AgentTypes.at(i)["tool"]["breaking"]
+			};
+			dataModel.AgentModels.push_back(agentModel);
+		}
+
 	}
-	return model;
+	return dataModel;
 }
