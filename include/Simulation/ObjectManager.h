@@ -17,6 +17,10 @@ public:
 		return AgentRegistry[index];
 	}
 
+	static int GetRegistrySize() {
+		return AgentRegistry.size();
+	}
+
 private:
 
 	static std::vector<T> AgentRegistry;

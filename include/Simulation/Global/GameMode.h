@@ -13,7 +13,9 @@ public:
 	unsigned int NbrCycles = 0;
 	ObjectManager<AgentModel>* AgentsManager = nullptr;
 	ObjectManager<ItemModel>* ItemsManager = nullptr;
+	ObjectManager<EventModel>* EventsManager = nullptr;
 
+	void UpdateRegistry();
 	
 private:
 
