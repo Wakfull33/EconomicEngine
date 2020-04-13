@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <any>
 
 struct Production {
 	int Item;
@@ -55,9 +56,34 @@ struct ItemModel {
 	}
 };
 
+struct EventModel {
+	
+	std::string EventName;
+	bool Recurrent;
+	bool Temporary;
+	int EventDuration;
+	int OccurenceCycle;
+	std::vector<AgentModel> AgentsModelImpacted;
+	std::vector<ItemModel> ItemsModelImpacted;
+
+	friend bool operator==(const EventModel& Event1, const EventModel& Event2) {
+		if (Event1.EventName == Event2.EventName) {
+			return true;
+		}
+		return false;
+	}
+
+	friend bool operator!=(const EventModel& Event1, const EventModel& Event2) {
+		return !(Event1 == Event2);
+	}
+};
+
+	
 struct DataModel {
+	
 	std::vector<AgentModel> AgentModels;
 	std::vector<ItemModel> ItemModels;
+	std::vector<EventModel> EventModels;
 	std::vector<std::pair<std::string, int>> NbrAgentsPerModels;
 	unsigned int NombreCycles;
 };

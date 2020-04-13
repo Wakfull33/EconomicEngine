@@ -40,6 +40,11 @@ void Simulation::ConsummeCycle() {
 	//if (NbrCycles <= 0) {
 	//	SimulationActive = false;
 	//}
+	for(auto& _Event : Events) {
+		if (_Event->CanHappen()) {
+			_Event->BroadCast();
+		}
+	}
 }
 
 void Simulation::EndSimulation(){

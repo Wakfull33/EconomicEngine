@@ -15,6 +15,7 @@ set (HEADERS
     ${HEADER_DIR}/Engine/Parser/Parser.h
     ${HEADER_DIR}/Engine/Parser/Json.h
     ${HEADER_DIR}/Engine/Parser/Librairy/json.hpp
+    ${HEADER_DIR}/Simulation/Event.h
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/ObjectManager.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
@@ -25,6 +26,7 @@ set (SOURCES
     ${SOURCE_DIR}/Core/GameplayStatics.cpp
     ${SOURCE_DIR}/Engine/Engine.cpp
     ${SOURCE_DIR}/Engine/Parser/Json.cpp
+    ${SOURCE_DIR}/Simulation/Event.cpp
     ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
     ${SOURCE_DIR}/Simulation/Global/GameMode.cpp

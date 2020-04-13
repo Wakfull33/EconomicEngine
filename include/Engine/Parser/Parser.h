@@ -4,7 +4,7 @@
 #include "Core/GameplayStatics.h"
 #include "Simulation/Global/GameMode.h"
 #include "Simulation/ObjectManager.h"
-#include <iostream>
+#include "Simulation/Event.h"
 
 
 template<class T>
@@ -20,26 +20,44 @@ public:
 	static void InitSimulationFromFile(Simulation* _Simulation, std::string FilePath){
 		DataModel SimulationModel = T::Read(FilePath);
 		RegisterParametersFromData(SimulationModel);
-		CreateSimulationAgents(_Simulation, SimulationModel);
+		CreateSimulationObjects(_Simulation, SimulationModel);
 	}
 
 	static void Write(std::string FilePath) {
-		//TODO
+		//TODO Titi
 	}
 	
 	static void RegisterParametersFromData(DataModel& Model){
 		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
 		SimulationGameMode->NbrCycles = Model.NombreCycles;
+
+		//TODO Titi Register Item
+		
 		SimulationGameMode->AgentsManager = new ObjectManager<AgentModel>;
 		for (auto& _AgentModel : Model.AgentModels){
 			ObjectManager<AgentModel>::Register(_AgentModel);
 		}
+		for (auto& _EventModel : Model.EventModels) {
+			ObjectManager<EventModel>::Register(_EventModel);
+		}
+
+		//
 		
 	}
 
-	static void CreateSimulationAgents(Simulation* _Simulation, DataModel& Model) {
+	static void CreateSimulationObjects(Simulation* _Simulation, DataModel& Model) {
+		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
 		//TODO Titi
-		float clockTime = dynamic_cast<auto>(_Simulation->Clock);
+		//
+		//
+		////////////////////////
+		//TODO Benoit Add system with std::any and Add sytem for handling city if added
+		for (int i = 0; i < SimulationGameMode->EventsManager->GetRegistrySize(); i++) {
+			Event* _Event = new Event(i);
+			_Event->AgentsSignal.Connect<ObjectManager<AgentModel>>(&ObjectManager<AgentModel>::UpdateObjects);
+			_Event->ItemsSignal.Connect<ObjectManager<ItemModel>>(&ObjectManager<ItemModel>::UpdateObjects);
+			_Simulation->Events.push_back(_Event);
+		}
 		
 	}
 	

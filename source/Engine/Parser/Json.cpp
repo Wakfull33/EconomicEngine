@@ -17,8 +17,12 @@ DataModel Json::Read(std::string Path){
 	std::ifstream in(Path);
 	DataModel dataModel;
 	if (!in.fail()){
+		//ItemsTypes
+		//TODO Titi
+		//
+		//AgentTypes
 		auto AgentTypes = j_AgentTypes["agentTypes"];
-		for (int i = 0 ; i <AgentTypes.size(); i++){
+		for (int i = 0 ; i < AgentTypes.size(); i++){
 			AgentModel agentModel;
 			agentModel.JobName = AgentTypes.at(i)["job"];
 			agentModel.AgentProd = {
@@ -32,7 +36,8 @@ DataModel Json::Read(std::string Path){
 			};
 			dataModel.AgentModels.push_back(agentModel);
 		}
-
+		//Event
+		//TODO Benoit
 	}
 	return dataModel;
 }
