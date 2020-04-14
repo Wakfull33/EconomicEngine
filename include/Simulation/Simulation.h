@@ -13,8 +13,10 @@ class Simulation {
 public:
 
 	////////VARIABLES///////////
+
 	
 	int NbrCycles;
+
 	bool SimulationActive;
 	std::vector<Agent*> Agents;
 	std::vector<Event*> Events;
