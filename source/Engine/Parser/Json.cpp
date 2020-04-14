@@ -28,7 +28,7 @@ DataModel Json::Read(std::string Path){
 			agentModel.AgentProd = {
 				0,AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]
 			};
-			agentModel.AgentConsummation = {
+			agentModel.AgentConsum = {
 				0,AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]
 			};
 			agentModel.AgentJobTool = {

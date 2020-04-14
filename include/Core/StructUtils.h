@@ -7,12 +7,36 @@ struct Production {
 	int Item;
 	int MaxProd;
 	int MinProd;
+
+	friend Production& operator-(Production& Object1, const Production& Object2) {
+		Object1.MaxProd -= Object2.MaxProd;
+		Object1.MinProd -= Object2.MinProd;
+		return Object1;
+	}
+
+	friend Production& operator+(Production& Object1, const Production& Object2) {
+		Object1.MaxProd += Object2.MaxProd;
+		Object1.MinProd += Object2.MinProd;
+		return Object1;
+	}
 };
 
 struct Consommation {
 	int Item;
 	int MaxConsum;
 	int MinConsum;
+
+	friend Consommation& operator-(Consommation& Object1, const Consommation& Object2) {
+		Object1.MaxConsum -= Object2.MaxConsum;
+		Object1.MinConsum -= Object2.MinConsum;
+		return Object1;
+	}
+
+	friend Consommation& operator+(Consommation& Object1, const Consommation& Object2) {
+		Object1.MaxConsum += Object2.MaxConsum;
+		Object1.MinConsum += Object2.MinConsum;
+		return Object1;
+	}
 };
 
 struct JobTool {
@@ -24,7 +48,7 @@ struct AgentModel {
 	
 	std::string JobName;
 	Production AgentProd;
-	Consommation AgentConsummation;
+	Consommation AgentConsum;
 	JobTool AgentJobTool;
 
 	friend bool operator==(const AgentModel& Model1, const AgentModel& Model2){
@@ -37,7 +61,21 @@ struct AgentModel {
 	friend bool operator!=(const AgentModel& Model1, const AgentModel& Model2) {
 		return !(Model1 == Model2);
 	}
+
+	friend AgentModel& operator+(AgentModel& Object1, const AgentModel& Object2) {
+		Object1.AgentProd = Object1.AgentProd + Object2.AgentProd;
+		Object1.AgentConsum = Object1.AgentConsum + Object2.AgentConsum;
+		return Object1;
+	}
+
+	friend AgentModel& operator-(AgentModel& Object1, const AgentModel& Object2) {
+		Object1.AgentProd = Object1.AgentProd - Object2.AgentProd;
+		Object1.AgentConsum = Object1.AgentConsum - Object2.AgentConsum;
+		return Object1;
+	}
 };
+
+
 
 struct ItemModel {
 	
@@ -50,11 +88,22 @@ struct ItemModel {
 		}
 		return false;
 	}
-
+	
 	friend bool operator!=(const ItemModel& Item1, const ItemModel& Item2) {
 		return !(Item1 == Item2);
 	}
+
+	friend ItemModel& operator-(ItemModel& Item1, const ItemModel& Item2) {
+		Item1.Price -= Item2.Price;
+		return Item1;
+	}
+
+	friend ItemModel& operator+(ItemModel& Item1, const ItemModel& Item2) {
+		Item1.Price += Item2.Price;
+		return Item1;
+	}
 };
+
 
 struct EventModel {
 	

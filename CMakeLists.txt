@@ -11,6 +11,7 @@ set (HEADERS
     ${HEADER_DIR}/Core/Signal.h
     ${HEADER_DIR}/Core/StructUtils.h
     ${HEADER_DIR}/Core/GameplayStatics.h
+    ${HEADER_DIR}/Core/Types.h
     ${HEADER_DIR}/Engine/Engine.h
     ${HEADER_DIR}/Engine/Parser/Parser.h
     ${HEADER_DIR}/Engine/Parser/Json.h

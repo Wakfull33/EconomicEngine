@@ -13,19 +13,16 @@ class Simulation {
 public:
 
 	////////VARIABLES///////////
-
-	Time Clock;
-	float DeltaTime;
-
+	
+	int NbrCycles;
 	bool SimulationActive;
 	std::vector<Agent*> Agents;
 	std::vector<Event*> Events;
-	
+	std::vector<std::vector<int>> CyclesEventRegistry;
 
 	////////FONCTIONS//////////
 	///
 	Simulation();
-	Simulation(Time _Clock);
 	~Simulation();
 
 	void ConsummeCycle();

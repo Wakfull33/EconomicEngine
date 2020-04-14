@@ -37,9 +37,6 @@ public:
 		for (auto& _AgentModel : Model.AgentModels){
 			ObjectManager<AgentModel>::Register(_AgentModel);
 		}
-		for (auto& _EventModel : Model.EventModels) {
-			ObjectManager<EventModel>::Register(_EventModel);
-		}
 
 		//
 		
@@ -52,10 +49,11 @@ public:
 		//
 		////////////////////////
 		//TODO Benoit Add system with std::any and Add sytem for handling city if added
-		for (int i = 0; i < SimulationGameMode->EventsManager->GetRegistrySize(); i++) {
-			Event* _Event = new Event(i);
-			_Event->AgentsSignal.Connect<ObjectManager<AgentModel>>(&ObjectManager<AgentModel>::UpdateObjects);
-			_Event->ItemsSignal.Connect<ObjectManager<ItemModel>>(&ObjectManager<ItemModel>::UpdateObjects);
+
+		for (auto& EventModel: Model.EventModels) {
+			Event* _Event = new Event(EventModel);
+			_Event->AgentsSignal.Connect<ObjectManager<AgentModel>>(&ObjectManager<AgentModel>::UpdateObjectsFromEvent);
+			_Event->ItemsSignal.Connect<ObjectManager<ItemModel>>(&ObjectManager<ItemModel>::UpdateObjectsFromEvent);
 			_Simulation->Events.push_back(_Event);
 		}
 		

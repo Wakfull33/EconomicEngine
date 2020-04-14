@@ -12,7 +12,7 @@ Engine::~Engine() {
 }
 
 Simulation* Engine::CreateSimulation() {
-	Simulation* EconomicSimulation = new Simulation(std::chrono::steady_clock::now());
+	Simulation* EconomicSimulation = new Simulation();
 	GamePlayStatics::SetSimulation(EconomicSimulation);
 	Parser<Json>::InitSimulationFromFile(EconomicSimulation, "TODO");
 	EconomicSimulation->SimulationActive = true;

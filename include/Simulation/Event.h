@@ -3,21 +3,24 @@
 #include "Core/StructUtils.h"
 #include <vector>
 
+class GameMode;
+
 class Event {
 public:
+	
 	Event() = default;
-	Event(int Id);
+	Event(EventModel& _Model);
 
-	bool CanHappen();
-	void BroadCast();
+	void BroadCast(bool IsStart);
 
-	Signal<std::vector<AgentModel>&> AgentsSignal;
-	Signal<std::vector<ItemModel>&> ItemsSignal;
+	Signal<std::vector<AgentModel>&, bool> AgentsSignal;
+	Signal<std::vector<ItemModel>&, bool> ItemsSignal;
 
+	void EventStart();
+	void EventEnd();
 
-private:
-	
+	bool AsBegin;
 	int EventId;
+	EventModel Model;
 
-	
 };

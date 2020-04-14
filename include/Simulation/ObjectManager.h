@@ -21,15 +21,18 @@ public:
 		return ObjectRegistry.size();
 	}
 
-	static void UpdateObject(int index, T Element) {
-		ObjectRegistry[index] = Element;
-		//TODO Benoit Save Actual registry if update is temporary
-	}
-
-	static void UpdateObjects(std::vector<T>& Elements) {
+	static void UpdateObjectsFromEvent(std::vector<T>& Elements, bool Start) {
 		for (auto& Element : Elements) {
-			//TODO Benoit Replace Element in registry
-			//TODO Benoit Save Actual registry if update is temporary
+			auto it = std::find(ObjectRegistry.begin(), ObjectRegistry.end(), Element);
+			if (it == ObjectRegistry.end()) {
+				continue;
+			}
+			if (Start) {
+				it - Element;
+			}
+			else {
+				it + Element;
+			}
 		}
 	}
 

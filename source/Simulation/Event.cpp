@@ -1,17 +1,24 @@
 #include "Simulation/Event.h"
-#include "..\..\include\Simulation\Event.h"
+#include "Simulation/Global/GameMode.h"
+#include "Core/GameplayStatics.h"
 
-Event::Event(int Id)
-	: EventId(Id){
-	//TODO get gamemode
+Event::Event(EventModel& _Model)
+	: Model(_Model){
 }
 
-bool Event::CanHappen() {
-	return false;
-	//TODO check it the right cycle
+
+void Event::BroadCast(bool IsStart) {
+	AgentsSignal.BroadCast(Model.AgentsModelImpacted, IsStart);
+	ItemsSignal.BroadCast(Model.ItemsModelImpacted, IsStart);
 }
 
-void Event::BroadCast() {
-	//TODO broadcast signal with information
+void Event::EventStart() {
+	AsBegin = true;
+	BroadCast(AsBegin);
+}
+
+void Event::EventEnd() {
+	AsBegin = false;
+	BroadCast(AsBegin);
 }
 
