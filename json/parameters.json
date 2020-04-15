@@ -1,24 +1,30 @@
 {
-    "init_list": [
-        {
-            "class": "farmer",
-            "quantity": 200000
-        },
-        {
-            "class": "miner",
-            "quantity": 2
-        },
-        {
-            "class": "refiner",
-            "quantity": 2
-        },
-        {
-            "class": "woodcutter",
-            "quantity": 2
-        },
-        {
-            "class": "blacksmith",
-            "quantity": 2
-        }
-    ]
+  "SimulationConfig": {
+    "NombreCycles": 500,
+    "DataCollected": true,//For test purpose we will see how much collecting data slow the process
+    "DataCollectionOccurence": 1, //1 mean each turn, 30 mean every 30 turns the data of the actual turn will be collected
+    "OutputFile": ""
+  },
+  "AgentsInitList": [
+    {
+      "class": "farmer",
+      "quantity": 200000
+    },
+    {
+      "class": "miner",
+      "quantity": 2
+    },
+    {
+      "class": "refiner",
+      "quantity": 2
+    },
+    {
+      "class": "woodcutter",
+      "quantity": 2
+    },
+    {
+      "class": "blacksmith",
+      "quantity": 2
+    }
+  ]
 }

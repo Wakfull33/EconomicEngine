@@ -130,10 +130,15 @@ struct EventModel {
 
 	
 struct DataModel {
-	
+
+	bool DataCollected;
+	unsigned char DataCollectionOccurence;
+	unsigned int NombreCycles;
+	std::string OutputFile;
 	std::vector<AgentModel> AgentModels;
 	std::vector<ItemModel> ItemModels;
 	std::vector<EventModel> EventModels;
 	std::vector<std::pair<std::string, int>> NbrAgentsPerModels;
-	unsigned int NombreCycles;
+	
+	
 };

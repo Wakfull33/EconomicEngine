@@ -18,20 +18,18 @@ public:
 	~Parser(){	
 	}
 
-	static void InitSimulationFromFile(Simulation* _Simulation, std::string ParametersFilePath, std::string DatasFilePath){
-		DataModel SimulationParamtersModel = T::Read(ParametersFilePath);
-		DataModel SimulationDatasModel = T::Read(DatasFilePath);
-		RegisterParametersFromData(SimulationParamtersModel);
-		CreateSimulationObjects(_Simulation, SimulationDatasModel);
+	static void InitSimulationFromFile(Simulation* _Simulation, std::string DatasFilePath, std::string ParametersFilePath){
+		DataModel SimulationParamtersModel = T::Read(DatasFilePath, ParametersFilePath);
+		RegisterParametersFromData(_Simulation, SimulationParamtersModel);
+		CreateSimulationObjects(_Simulation, SimulationParamtersModel);
 	}
 
 	static void Write(std::string FilePath) {
 		//TODO Titi
 	}
 	
-	static void RegisterParametersFromData(DataModel& Model){
+	static void RegisterParametersFromData(Simulation* _Simulation, DataModel& Model){
 		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
-		Simulation* _Simulation = GamePlayStatics::GetSimulation();
 		_Simulation->TotalNbrCycles = Model.NombreCycles;
 
 		//TODO Titi Register Item

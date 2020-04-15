@@ -1,5 +1,9 @@
 {
-  "agentTypes":
+  "ItemTypes": 
+  [
+
+  ],
+  "AgentTypes":
   [
     {
       "job": "Farmer",
@@ -32,7 +36,66 @@
       "tool": {"item":"", "breaking":0.1}
     }
   ],
-  "itemTypes":[
+  "Events": [
+    {
+      "EventName": "War",
+      "EventCycleOccurence": 100,
+      "EventIsTemporary": true,
+      "EventDuration": 50,
+      "EventIsRecurrent": false,
+      "EventCyclesSpacing": 0,
+      "AgentTypesImpacted": //The agentTypes impacted have offset that will modified their original stat
+      [
+        {
+          "JobImpacted": "Farmer",
+          "ProductionOffset": { "item": "food", "MaxOffset": -2,"MinOffset": -1},
+          "ConsumeOffset": {"item": "wood","MaxOffset": 0, "MinOffset": 0 },
+          "ToolOffset": { "item": "","BreakingOffset": 0}
+        },
+        {
+          "JobImpacted": "Miner",
+          "ProductionOffset": {"item": "ore","MaxOffset": 1,"MinOffset": 0 },
+          "ConsumeOffset": {"item": "wood","MaxOffset": 0,"MinOffset": 0 },
+          "ToolOffset": {"item": "","BreakingOffset": 0 }
+        },
+        {
+          "JobImpacted": "Refiner",
+          "ProductionOffset": {"item": "metal","MaxOffset": 1,"MinOffset": 0 },
+          "ConsumeOffset": {"item": "ore","MaxOffset": 1,"MinOffset": 0},
+          "ToolOffset": { "item": "","BreakingOffset": 0}
+        },
+        {
+          "JobImpacted": "Blacksmith",
+          "ProductionOffset": {"item": "tool","MaxOffset": 5,"MinOffset": 0},
+          "ConsumeOffset": {"item": "metal","MaxOffset": 0,"MinOffset": 0 },
+          "ToolOffset": {"item": "","BreakingOffset": 0}
+        }
+      ],
+      "ItemsImpacted": //The agentTypes impacted have offset that will modified their original stat
+      [
 
+      ]
+    },
+    {
+      "EventName": "NoWood",
+      "EventCycleOccurence": 100,
+      "EventIsTemporary": true,
+      "EventDuration": 50,
+      "EventIsRecurrent": false,
+      "EventCyclesSpacing": 0,
+      "AgentTypesImpacted": //The agentTypes impacted have offset that will modified their original stat
+      [
+        {
+          "JobImpacted": "WoodCutter",
+          "ProductionOffset": {"item": "wood","MaxOffset": -6,"MinOffset": -6 },
+          "ConsumeOffset": {"item": "tool","MaxOffset": 0,"MinOffset": 0},
+          "ToolOffset": {"item": "","BreakingOffset": 0 }
+        }
+      ],
+      "ItemsImpacted": //The agentTypes impacted have offset that will modified their original stat
+      [
+
+      ]
+    }
   ]
 }

@@ -13,7 +13,7 @@ public:
 
 	static bool IsFileValid(std::string FileName);
 
-	static DataModel Read(std::string Path);
+	static DataModel Read(std::string DatasPath, std::string ParametersPath);
 
 	
 
