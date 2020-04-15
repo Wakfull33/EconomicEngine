@@ -28,10 +28,10 @@ public:
 				continue;
 			}
 			if (Start) {
-				it - Element;
+				*it - Element;
 			}
 			else {
-				it + Element;
+				*it + Element;
 			}
 		}
 	}

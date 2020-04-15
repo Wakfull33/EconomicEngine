@@ -14,7 +14,7 @@ Engine::~Engine() {
 Simulation* Engine::CreateSimulation() {
 	Simulation* EconomicSimulation = new Simulation();
 	GamePlayStatics::SetSimulation(EconomicSimulation);
-	Parser<Json>::InitSimulationFromFile(EconomicSimulation, "TODO");
+	Parser<Json>::InitSimulationFromFile(EconomicSimulation, "TODO", "");
 	EconomicSimulation->SimulationActive = true;
 	return EconomicSimulation;
 }

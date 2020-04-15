@@ -21,8 +21,8 @@ Simulation::~Simulation() {
 void Simulation::ConsummeCycle() {
 
 
-	if (!CyclesEventRegistry[NbrCycles].empty()) {
-		for (auto& Index : CyclesEventRegistry[NbrCycles]) {
+	if (!CyclesEventRegistry[ActualCycle].empty()) {
+		for (auto& Index : CyclesEventRegistry[ActualCycle]) {
 			if (!Events[Index]->AsBegin) {
 				Events[Index]->EventStart();
 			}
@@ -31,10 +31,13 @@ void Simulation::ConsummeCycle() {
 			}
 		}
 	}
-	NbrCycles++;
+	ActualCycle++;
+	if (ActualCycle >= TotalNbrCycles) {
+		EndSimulation();
+	}
 }
 
 void Simulation::EndSimulation(){
 
-
+	SimulationActive = false;
 }

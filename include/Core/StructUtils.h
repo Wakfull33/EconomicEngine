@@ -108,10 +108,11 @@ struct ItemModel {
 struct EventModel {
 	
 	std::string EventName;
-	bool Recurrent;
+	int OccurenceCycle;
 	bool Temporary;
 	int EventDuration;
-	int OccurenceCycle;
+	bool Recurrent;
+	int CyclesSpacing;
 	std::vector<AgentModel> AgentsModelImpacted;
 	std::vector<ItemModel> ItemsModelImpacted;
 

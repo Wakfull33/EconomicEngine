@@ -15,7 +15,8 @@ public:
 	////////VARIABLES///////////
 
 	
-	int NbrCycles;
+	int TotalNbrCycles;
+	int ActualCycle;
 
 	bool SimulationActive;
 	std::vector<Agent*> Agents;
