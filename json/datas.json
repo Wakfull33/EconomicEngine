@@ -7,33 +7,33 @@
   [
     {
       "job": "Farmer",
-      "produce": {"item":"food", "max":4, "min":2},
-      "consume": {"item":"wood", "max":1, "min":1},
-      "tool": {"item":"", "breaking":0.1}
+      "produce": {"item":0, "max":4, "min":2},
+      "consume": {"item":0, "max":1, "min":1},
+      "tool": {"item":0, "breaking":0.1}
     },
     {
       "job": "Miner",
-      "produce": {"item":"ore", "max":4, "min":2},
-      "consume": {"item":"", "max":0, "min":0},
-      "tool": {"item":"", "breaking":0.1}
+      "produce": {"item": 1, "max":4, "min":2},
+      "consume": {"item": 2, "max":0, "min":0},
+      "tool": {"item":0, "breaking":0.1}
     },
     {
       "job": "Refiner",
-      "produce": {"item":"metal", "max":4, "min":2},
-      "consume": {"item":"ore", "max":1, "min":1},
-      "tool": {"item":"", "breaking":0.1}
+      "produce": {"item":0, "max":4, "min":2},
+      "consume": {"item":0, "max":1, "min":1},
+      "tool": {"item":0, "breaking":0.1}
     },
     {
       "job": "Woodcutter",
-      "produce": {"item":"wood", "max":2, "min":1},
-      "consume": {"item":"", "max":0, "min":0},
-      "tool": {"item":"", "breaking":0.1}
+      "produce": {"item":0, "max":2, "min":1},
+      "consume": {"item":0, "max":0, "min":0},
+      "tool": {"item":0, "breaking":0.1}
     },
     {
       "job": "Blacksmith",
-      "produce": {"item":"tool", "max":0, "min":0},
-      "consume": {"item":"metal", "max":0, "min":0},
-      "tool": {"item":"", "breaking":0.1}
+      "produce": {"item":0, "max":0, "min":0},
+      "consume": {"item":0, "max":0, "min":0},
+      "tool": {"item":0, "breaking":0.1}
     }
   ],
   "Events": [
@@ -48,27 +48,27 @@
       [
         {
           "JobImpacted": "Farmer",
-          "ProductionOffset": { "item": "food", "MaxOffset": -2,"MinOffset": -1},
-          "ConsumeOffset": {"item": "wood","MaxOffset": 0, "MinOffset": 0 },
-          "ToolOffset": { "item": "","BreakingOffset": 0}
+          "ProductionOffset": { "item": 0, "MaxOffset": -2,"MinOffset": -1},
+          "ConsumeOffset": {"item": 0,"MaxOffset": 0, "MinOffset": 0 },
+          "ToolOffset": { "item": 0,"BreakingOffset": 0}
         },
         {
           "JobImpacted": "Miner",
-          "ProductionOffset": {"item": "ore","MaxOffset": 1,"MinOffset": 0 },
-          "ConsumeOffset": {"item": "wood","MaxOffset": 0,"MinOffset": 0 },
-          "ToolOffset": {"item": "","BreakingOffset": 0 }
+          "ProductionOffset": {"item": 0,"MaxOffset": 1,"MinOffset": 0 },
+          "ConsumeOffset": {"item": 0,"MaxOffset": 0,"MinOffset": 0 },
+          "ToolOffset": {"item": 0,"BreakingOffset": 0 }
         },
         {
           "JobImpacted": "Refiner",
-          "ProductionOffset": {"item": "metal","MaxOffset": 1,"MinOffset": 0 },
-          "ConsumeOffset": {"item": "ore","MaxOffset": 1,"MinOffset": 0},
-          "ToolOffset": { "item": "","BreakingOffset": 0}
+          "ProductionOffset": {"item": 0,"MaxOffset": 1,"MinOffset": 0 },
+          "ConsumeOffset": {"item": 0,"MaxOffset": 1,"MinOffset": 0},
+          "ToolOffset": { "item": 0,"BreakingOffset": 0}
         },
         {
           "JobImpacted": "Blacksmith",
-          "ProductionOffset": {"item": "tool","MaxOffset": 5,"MinOffset": 0},
-          "ConsumeOffset": {"item": "metal","MaxOffset": 0,"MinOffset": 0 },
-          "ToolOffset": {"item": "","BreakingOffset": 0}
+          "ProductionOffset": {"item": 0,"MaxOffset": 5,"MinOffset": 0},
+          "ConsumeOffset": {"item": 0,"MaxOffset": 0,"MinOffset": 0 },
+          "ToolOffset": {"item": 0,"BreakingOffset": 0}
         }
       ],
       "ItemsImpacted": //The agentTypes impacted have offset that will modified their original stat
@@ -87,9 +87,9 @@
       [
         {
           "JobImpacted": "WoodCutter",
-          "ProductionOffset": {"item": "wood","MaxOffset": -6,"MinOffset": -6 },
-          "ConsumeOffset": {"item": "tool","MaxOffset": 0,"MinOffset": 0},
-          "ToolOffset": {"item": "","BreakingOffset": 0 }
+          "ProductionOffset": {"item": 0,"MaxOffset": -6,"MinOffset": -6 },
+          "ConsumeOffset": {"item": 0,"MaxOffset": 0,"MinOffset": 0},
+          "ToolOffset": {"item": 0,"BreakingOffset": 0 }
         }
       ],
       "ItemsImpacted": //The agentTypes impacted have offset that will modified their original stat

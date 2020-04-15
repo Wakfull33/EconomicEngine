@@ -17,7 +17,6 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 	jsonObject j_Data;
 	std::ifstream in(DatasPath);
 	if (!in.fail()){
-		//TODO Handle the items actually 0 is always pass in the struct
 		in >> j_Data;
 		//ItemsTypes
 		auto ItemTypes = j_Data["ItemTypes"];
@@ -30,9 +29,9 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 		for (int i = 0 ; i < AgentTypes.size(); i++){
 			AgentModel agentModel;
 			agentModel.JobName = AgentTypes.at(i)["job"];
-			agentModel.AgentProd = {0,AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]};
-			agentModel.AgentConsum = {0,AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]};
-			agentModel.AgentJobTool = {0,AgentTypes.at(i)["tool"]["breaking"]};
+			agentModel.AgentProd = { AgentTypes.at(i)["item"],AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]};
+			agentModel.AgentConsum = { AgentTypes.at(i)["item"],AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]};
+			agentModel.AgentJobTool = { AgentTypes.at(i)["item"],AgentTypes.at(i)["tool"]["breaking"]};
 			_DataModel.AgentModels.push_back(agentModel);
 		}
 		//Event
@@ -49,9 +48,9 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 			for (int j = 0; j < AgentTypesImpacted.size(); j++) {
 				AgentModel _AgentModel;
 				_AgentModel.JobName = AgentTypesImpacted.at(j)["JobImpacted"];
-				_AgentModel.AgentProd = { 0,AgentTypesImpacted.at(j)["ProductionOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ProductionOffset"]["MinOffset"] };
-				_AgentModel.AgentConsum = { 0,AgentTypesImpacted.at(j)["ConsumeOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MinOffset"] };
-				_AgentModel.AgentJobTool = { 0,AgentTypesImpacted.at(j)["ToolOffset"]["BreakingOffset"] };
+				_AgentModel.AgentProd = { AgentTypesImpacted.at(i)["item"],AgentTypesImpacted.at(j)["ProductionOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ProductionOffset"]["MinOffset"] };
+				_AgentModel.AgentConsum = { AgentTypesImpacted.at(i)["item"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MinOffset"] };
+				_AgentModel.AgentJobTool = { AgentTypesImpacted.at(i)["item"],AgentTypesImpacted.at(j)["ToolOffset"]["BreakingOffset"] };
 				_EventModel.AgentsModelImpacted.push_back(_AgentModel);
 			}
 			auto ItemsImpacted = Events.at(i)["ItemsImpacted"];

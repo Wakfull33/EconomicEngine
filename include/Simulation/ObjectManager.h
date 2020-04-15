@@ -36,6 +36,10 @@ public:
 		}
 	}
 
+	static std::vector<T>& GetRegistry(){
+		return ObjectRegistry;
+	}
+	
 private:
 
 	static std::vector<T> ObjectRegistry;

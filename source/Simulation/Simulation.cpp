@@ -19,8 +19,10 @@ Simulation::~Simulation() {
 //}
 
 void Simulation::ConsummeCycle() {
-
-
+	
+	for (auto& Agent: Agents) {
+		Agent->DoJob();
+	}
 	if (!CyclesEventRegistry[ActualCycle].empty()) {
 		for (auto& Index : CyclesEventRegistry[ActualCycle]) {
 			if (!Events[Index]->AsBegin) {

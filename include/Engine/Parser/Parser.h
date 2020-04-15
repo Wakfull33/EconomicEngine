@@ -5,6 +5,7 @@
 #include "Simulation/Global/GameMode.h"
 #include "Simulation/ObjectManager.h"
 #include "Simulation/Event.h"
+#include "Simulation/Agent/Agent.h"
 #include <vector>
 
 
@@ -31,25 +32,31 @@ public:
 	static void RegisterParametersFromData(Simulation* _Simulation, DataModel& Model){
 		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
 		_Simulation->TotalNbrCycles = Model.NombreCycles;
-
-		//TODO Titi Register Item
-		
+		_Simulation->CollectData = Model.DataCollected;
+		_Simulation->DataCollectionOccurence = Model.DataCollectionOccurence;
+		_Simulation->OutputFilePath = Model.OutputFile;
+		SimulationGameMode->ItemsManager = new ObjectManager<ItemModel>;
+		for (auto& _ItemModel : Model.ItemModels) {
+			ObjectManager<ItemModel>::Register(_ItemModel);
+		}
 		SimulationGameMode->AgentsManager = new ObjectManager<AgentModel>;
 		for (auto& _AgentModel : Model.AgentModels){
 			ObjectManager<AgentModel>::Register(_AgentModel);
 		}
-
-		//
-		
 	}
 
 	static void CreateSimulationObjects(Simulation* _Simulation, DataModel& Model) {
 		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
-		//TODO Titi
-		//
-		//
-		////////////////////////
-
+		
+		for (auto& NbrAgent : Model.NbrAgentsPerModels) {
+			auto Registry = SimulationGameMode->AgentsManager->GetRegistry();
+			auto iterator = std::find(Registry.begin(), Registry.end(), NbrAgent.first);
+			if (iterator != Registry.end()) {
+				Agent* _Agent = new Agent(iterator - Registry.begin());
+				_Simulation->Agents.push_back(_Agent);
+			}	
+		}
+		
 		for (int i = 0; i < Model.EventModels.size(); i++) {
 			
 			Event* _Event = new Event(Model.EventModels[i]);
