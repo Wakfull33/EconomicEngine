@@ -16,13 +16,28 @@ bool CSV::IsFileValid(std::string FileName) {
 }
 
 void CSV::Write(std::vector<CycleResult>& Results, std::string DatasPath) {
-	// test pour voir sans library csv
 	std::ofstream csv_File;
 	csv_File.open(DatasPath);
-	csv_File << "a,b,c,\n";
-	csv_File << "c,s,v,\n";
-	csv_File << "1,2,3.456\n";
-	csv_File << "semi;colon";
-	csv_File.close();
+	if (csv_File.is_open()){
+		for (auto& _CycleResult : Results) {
+			csv_File << "Resultats des agents :\n";
+			csv_File << "JobName, AsWork, AsTrade, AgentProfit\n";
+			for (auto& AgentResult : _CycleResult._AgentCycleResult) {
+				csv_File << AgentResult.Job;
+				csv_File << AgentResult.AsWork;
+				csv_File << AgentResult.AsTrade;
+				csv_File << AgentResult.Profit;
+				csv_File << "\n";
+			}
+			csv_File << "Resultats des items :\n";
+			csv_File << "ItemName, PriceChange\n";
+			for (auto& ItemResult : _CycleResult._ItemCycleResult) {
+				csv_File << ItemResult.Item;
+				csv_File << ItemResult.PriceFluctuation;
+				csv_File << "\n";
+			}
+		}
+		csv_File.close();
+	}
 }
 
