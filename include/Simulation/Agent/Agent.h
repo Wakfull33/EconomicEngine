@@ -2,8 +2,6 @@
 #include "Core/StructUtils.h"
 #include <vector>
 
-
-
 class Agent{
 
 public:
@@ -13,8 +11,11 @@ public:
 	~Agent() = default;
 	
 	void DoJob();
-	std::pair<int, int> ItemCount(const int itemWanted, bool isTool);
-	std::pair<bool, int> HasTool(const int item);
+	void DoTrade();
+	int ItemCount(const int itemWanted);
+	bool HasTool(const int tool);
+
+	std::pair<int, int> belief;
 	
 	int Job;
 	AgentCycleResult PreviousTurnResult;
