@@ -4,7 +4,7 @@
 #include <vector>
 
 struct Production {
-	SafeKeeper<int> Item;
+	ValKeeper<int> Item;
 	int MaxProd;
 	int MinProd;
 
@@ -25,7 +25,7 @@ struct Production {
 
 struct Consommation {
 	
-	SafeKeeper<int>Item;
+	ValKeeper<int>Item;
 	int MaxConsum;
 	int MinConsum;
 

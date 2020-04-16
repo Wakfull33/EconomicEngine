@@ -1,12 +1,12 @@
 #pragma once
 
 template<class T>
-class SafeKeeper {
+class ValKeeper {
 public:
 
-	SafeKeeper() = default;
+	ValKeeper() = default;
 	
-	SafeKeeper(T Value)
+	ValKeeper(T Value)
 		: ActualValue(Value){
 	}
 
