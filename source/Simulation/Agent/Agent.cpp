@@ -12,52 +12,115 @@ void Agent::DoJob() {
 	AgentModel agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
 	JobTool jobTool = agentModel.AgentJobTool;
 
-	int ressources = ItemCount(agentModel.AgentConsum.Item.Get(), false).first;
-	std::pair<bool, int> toolCheck = HasTool(jobTool.Item);
-	
-	if(toolCheck.first)
-	{
-		if (ressources >= agentModel.AgentConsum.MaxConsum)
-		{
-			for (int i = 0; i < agentModel.AgentProd.MaxProd; ++i)
-				Inventory.push_back(agentModel.AgentProd.Item.Get());
-		}
-		else if(ressources >= agentModel.AgentConsum.MinConsum)
-		{
-			for (int i = 0; i < agentModel.AgentProd.MinProd; ++i)
-				Inventory.push_back(agentModel.AgentProd.Item.Get());
-		}
+	int ressources = ItemCount(agentModel.AgentConsum.Item.Get());
+	int food;
+	bool toolCheck = ItemCount(jobTool.Item) > 0 ? true : false;
 
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_real_distribution<> dis(0, 1);
-		if (dis(gen) < jobTool.BreakingChance)
-			Inventory.erase(Inventory.begin() + toolCheck.second + 1);
+	if (ItemCount(food) > 0)
+	{
+		if (toolCheck)
+		{
+			if (ressources >= agentModel.AgentConsum.MaxConsum)
+			{
+				for (int i = 0; i < agentModel.AgentProd.MaxProd; ++i)
+					Inventory.push_back(agentModel.AgentProd.Item.Get());
+			}
+			else if (ressources >= agentModel.AgentConsum.MinConsum)
+			{
+				for (int i = 0; i < agentModel.AgentProd.MinProd; ++i)
+					Inventory.push_back(agentModel.AgentProd.Item.Get());
+			}
+			else
+			{
+				PreviousTurnResult.AsWork = false;
+			}
+
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_real_distribution<> dis(0, 1);
+			if (dis(gen) < jobTool.BreakingChance)
+				Inventory.erase(Inventory.begin() + jobTool.Item + 1);
+
+			Inventory[food] -= 1;
+			PreviousTurnResult.AsWork = true;
+		}
+		else
+		{
+			if (ressources >= agentModel.AgentConsum.MinConsum)
+			{
+				Inventory[food] -= 1;
+				Inventory.push_back(agentModel.AgentProd.Item.Get());
+			}
+			else
+			{
+				PreviousTurnResult.AsWork = false;
+			}
+		}
 	}
 	else
 	{
-		Inventory.push_back(agentModel.AgentProd.Item.Get());
+		PreviousTurnResult.AsWork = false;
 	}
 }
 
-std::pair<int, int> Agent::ItemCount(const int itemWanted, bool isTool)
+void Agent::DoTrade()
 {
-	int countRessource = 0;
-	int index = -1;
-	for (int i = 0; i < Inventory.size(); ++i) {
-		if (Inventory.at(i) == itemWanted) {
-			++countRessource;
-			if (isTool)
-				index = i;
+	AgentModel agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
+	int itemConsum = agentModel.AgentConsum.Item.Get();
+	int itemProd = agentModel.AgentProd.Item.Get();
+	int itemCountNeeded = agentModel.AgentConsum.MaxConsum;
+	int food;
+
+	#pragma region Ask
+	if (ItemCount(food) > 0)
+	{
+		if (HasTool(agentModel.AgentJobTool.Item))
+		{
+			if (ItemCount(itemConsum) < itemCountNeeded)
+			{
+				GameMode::Get()->TradeManager->RegisterAsk({
+					this,
+					itemConsum,
+					ItemCount(itemConsum) - itemCountNeeded,
+					false
+				});
+			}
+		}
+		else
+		{
+			GameMode::Get()->TradeManager->RegisterAsk({
+				this,
+				agentModel.AgentJobTool.Item,
+				1,
+				false
+			});
 		}
 	}
+	else
+	{
+		GameMode::Get()->TradeManager->RegisterAsk({
+			this,
+			food,
+			3,
+			false
+		});
+	}
+	#pragma endregion Ask
 
-	return { countRessource, index };
+	if(ItemCount(itemProd) > 0)
+	{
+		GameMode::Get()->TradeManager->RegisterBid({
+			this, itemProd, ItemCount(itemProd), false
+		});
+	}
 }
 
-std::pair<bool, int> Agent::HasTool(const int item)
+int Agent::ItemCount(const int itemWanted)
 {
-	std::pair<int, int> itemCount = ItemCount(item, true);
-	return std::pair<bool, int>(itemCount.first > 0 ? true : false, itemCount.second);
+	return Inventory[itemWanted];
 }
 
+bool Agent::HasTool(const int tool)
+{
+	return ItemCount(tool) > 0 ? true : false;
+}

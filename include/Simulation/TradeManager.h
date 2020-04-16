@@ -9,19 +9,11 @@ class TradeManager {
 public:
 	TradeManager() = default;
 
-	void RegisterBid(TradeModel& trade) {
-		const auto it = std::find(BidsRegistry.begin(), BidsRegistry.end(), trade);
-		if (it == BidsRegistry.end()) {
-			BidsRegistry.push_back(trade);
-		}
-	}
+	void RegisterBid(TradeModel& trade);
 
-	void RegisterAsk(TradeModel& trade) {
-		const auto it = std::find(AsksRegistry.begin(), AsksRegistry.end(), trade);
-		if (it == AsksRegistry.end()) {
-			AsksRegistry.push_back(trade);
-		}
-	}
+	void RegisterAsk(TradeModel& trade);
+
+	void ResolveTrades();
 	
 	TradeModel& GetBidObject(int index) {
 		return BidsRegistry[index];

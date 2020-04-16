@@ -34,6 +34,7 @@ set (SOURCES
     ${SOURCE_DIR}/Engine/Parser/Json.cpp
     ${SOURCE_DIR}/Engine/Parser/CSV.cpp
     ${SOURCE_DIR}/Simulation/Event.cpp
+    ${SOURCE_DIR}/Simulation/TradeManager.cpp
     ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
     ${SOURCE_DIR}/Simulation/Global/GameMode.cpp

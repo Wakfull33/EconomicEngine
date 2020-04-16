@@ -163,6 +163,8 @@ struct TradeModel{
 	class Agent* owner;
 	int Item;
 	int Quantity;
+	int Exchanged;
+	bool Resolved;
 };
 
 struct AgentCycleResult {
