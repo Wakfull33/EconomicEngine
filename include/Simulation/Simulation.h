@@ -17,7 +17,7 @@ public:
 	bool SimulationActive;
 	bool CollectData;
 	
-	int ActualCycle;
+	int ActualCycle = 0;
 	int TotalNbrCycles;
 	int DataCollectionOccurence;
 

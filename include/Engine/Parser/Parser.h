@@ -35,6 +35,7 @@ public:
 		_Simulation->CollectData = Model.DataCollected;
 		_Simulation->DataCollectionOccurence = Model.DataCollectionOccurence;
 		_Simulation->OutputFilePath = Model.OutputFile;
+		_Simulation->CyclesEventRegistry = std::vector<std::vector<int>>(_Simulation->TotalNbrCycles, std::vector<int>());
 		SimulationGameMode->ItemsManager = new ObjectManager<ItemModel>;
 		for (auto& _ItemModel : Model.ItemModels) {
 			ObjectManager<ItemModel>::Register(_ItemModel);
@@ -52,8 +53,10 @@ public:
 			auto Registry = SimulationGameMode->AgentsManager->GetRegistry();
 			auto iterator = std::find(Registry.begin(), Registry.end(), NbrAgent.first);
 			if (iterator != Registry.end()) {
-				Agent* _Agent = new Agent(iterator - Registry.begin());
-				_Simulation->Agents.push_back(_Agent);
+				for (int i = 0; i < NbrAgent.second; i++) {
+					Agent* _Agent = new Agent(iterator - Registry.begin());
+					_Simulation->Agents.push_back(_Agent);
+				}
 			}	
 		}
 		
@@ -67,8 +70,8 @@ public:
 					_Simulation->CyclesEventRegistry[NextTurnOccurence].push_back(i);
 					if (_Event->Model.Temporary) {
 						const int EventEnd = NextTurnOccurence + _Event->Model.EventDuration;
-						if (EventEnd > _Simulation->TotalNbrCycles) {
-							_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles].push_back(i);
+						if (EventEnd > _Simulation->TotalNbrCycles - 1) {
+							_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles - 1].push_back(i);
 						}
 						else {
 							_Simulation->CyclesEventRegistry[EventEnd].push_back(i);
@@ -81,8 +84,8 @@ public:
 				_Simulation->CyclesEventRegistry[_Event->Model.OccurenceCycle].push_back(i);
 				if (_Event->Model.Temporary) {
 					const int EventEnd = _Event->Model.OccurenceCycle + _Event->Model.EventDuration;
-					if (EventEnd > _Simulation->TotalNbrCycles) {
-						_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles].push_back(i);
+					if (EventEnd > _Simulation->TotalNbrCycles - 1) {
+						_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles - 1].push_back(i);
 					}
 					else {
 						_Simulation->CyclesEventRegistry[EventEnd].push_back(i);

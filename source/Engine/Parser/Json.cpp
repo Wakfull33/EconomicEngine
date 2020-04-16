@@ -1,5 +1,6 @@
 #include "Engine/Parser/Json.h"
 #include <fstream>
+#include <iostream>
 
 Json::Json(){
 }
@@ -18,24 +19,27 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 	std::ifstream in(DatasPath);
 	if (!in.fail()){
 		in >> j_Data;
+		std::cout << "File is open" << std::endl;
+
 		//ItemsTypes
 		auto ItemTypes = j_Data["ItemTypes"];
 		for (int i = 0; i < ItemTypes.size(); i++) {
-			ItemModel _ItemModel = { ItemTypes.at(i)["ItemName"], ItemTypes.at(i)["ItemPrice"]};
-			_DataModel.ItemModels.push_back(_ItemModel);
+			/*ItemModel _ItemModel = { ItemTypes.at(i)["ItemName"], ItemTypes.at(i)["ItemPrice"]};
+			_DataModel.ItemModels.push_back(_ItemModel);*/
 		}
 		//AgentTypes
 		auto AgentTypes = j_Data["AgentTypes"];
 		for (int i = 0 ; i < AgentTypes.size(); i++){
 			AgentModel agentModel;
 			agentModel.JobName = AgentTypes.at(i)["job"];
-			agentModel.AgentProd = { AgentTypes.at(i)["item"],AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]};
-			agentModel.AgentConsum = { AgentTypes.at(i)["item"],AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]};
-			agentModel.AgentJobTool = { AgentTypes.at(i)["item"],AgentTypes.at(i)["tool"]["breaking"]};
+			agentModel.AgentProd = { AgentTypes.at(i)["produce"]["item"],AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]};
+			agentModel.AgentConsum = { AgentTypes.at(i)["consume"]["item"],AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]};
+			agentModel.AgentJobTool = { AgentTypes.at(i)["tool"]["item"],AgentTypes.at(i)["tool"]["breaking"]};
 			_DataModel.AgentModels.push_back(agentModel);
 		}
 		//Event
 		auto Events = j_Data["Events"];
+		std::cout << "Events size : " << Events.size() << std::endl;
 		for (int i = 0; i < Events.size(); i++) {
 			EventModel _EventModel;
 			_EventModel.EventName = Events.at(i)["EventName"];
@@ -48,16 +52,17 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 			for (int j = 0; j < AgentTypesImpacted.size(); j++) {
 				AgentModel _AgentModel;
 				_AgentModel.JobName = AgentTypesImpacted.at(j)["JobImpacted"];
-				_AgentModel.AgentProd = { AgentTypesImpacted.at(i)["item"],AgentTypesImpacted.at(j)["ProductionOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ProductionOffset"]["MinOffset"] };
-				_AgentModel.AgentConsum = { AgentTypesImpacted.at(i)["item"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MinOffset"] };
-				_AgentModel.AgentJobTool = { AgentTypesImpacted.at(i)["item"],AgentTypesImpacted.at(j)["ToolOffset"]["BreakingOffset"] };
+				_AgentModel.AgentProd = { AgentTypesImpacted.at(j)["ProductionOffset"]["item"],AgentTypesImpacted.at(j)["ProductionOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ProductionOffset"]["MinOffset"] };
+				_AgentModel.AgentConsum = { AgentTypesImpacted.at(j)["ConsumeOffset"]["item"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MinOffset"] };
+				_AgentModel.AgentJobTool = { AgentTypesImpacted.at(j)["ToolOffset"]["item"],AgentTypesImpacted.at(j)["ToolOffset"]["BreakingOffset"] };
 				_EventModel.AgentsModelImpacted.push_back(_AgentModel);
 			}
 			auto ItemsImpacted = Events.at(i)["ItemsImpacted"];
 			for (int j = 0; j < ItemsImpacted.size(); j++) {
-				ItemModel _ItemModel = { ItemsImpacted.at(j)["ItemName"], ItemsImpacted.at(j)["PriceOffset"] };
-				_EventModel.ItemsModelImpacted.push_back(_ItemModel);
+				/*ItemModel _ItemModel = { ItemsImpacted.at(j)["ItemName"], ItemsImpacted.at(j)["PriceOffset"] };
+				_EventModel.ItemsModelImpacted.push_back(_ItemModel);*/
 			}
+			_DataModel.EventModels.push_back(_EventModel);
 		}
 	}
 	in.close();
