@@ -12,7 +12,7 @@ void Agent::DoJob() {
 	AgentModel agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
 	JobTool jobTool = agentModel.AgentJobTool;
 
-	int ressources = ItemCount(agentModel.AgentConsum.Item, false).first;
+	int ressources = ItemCount(agentModel.AgentConsum.Item.Get(), false).first;
 	std::pair<bool, int> toolCheck = HasTool(jobTool.Item);
 	
 	if(toolCheck.first)
@@ -20,12 +20,12 @@ void Agent::DoJob() {
 		if (ressources >= agentModel.AgentConsum.MaxConsum)
 		{
 			for (int i = 0; i < agentModel.AgentProd.MaxProd; ++i)
-				Inventory.push_back(agentModel.AgentProd.Item);
+				Inventory.push_back(agentModel.AgentProd.Item.Get());
 		}
 		else if(ressources >= agentModel.AgentConsum.MinConsum)
 		{
 			for (int i = 0; i < agentModel.AgentProd.MinProd; ++i)
-				Inventory.push_back(agentModel.AgentProd.Item);
+				Inventory.push_back(agentModel.AgentProd.Item.Get());
 		}
 
 		std::random_device rd;
@@ -36,7 +36,7 @@ void Agent::DoJob() {
 	}
 	else
 	{
-		Inventory.push_back(agentModel.AgentProd.Item);
+		Inventory.push_back(agentModel.AgentProd.Item.Get());
 	}
 }
 

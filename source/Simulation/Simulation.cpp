@@ -7,26 +7,23 @@
 Simulation::Simulation(){
 }
 
-
-
 Simulation::~Simulation() {
 	Agents.clear();
 	Events.clear();
 	CyclesEventRegistry.clear();
 }
 
-//void Simulation::InitSimulation(){
-//	DataModel Result = Parser<Json>::Read("Data.json");
-//	Parser<Json>::RegisterGameModeParameters(this, Result);
-//}
-
 void Simulation::ConsummeCycle() {
-	
-	for (auto& Agent: Agents) {
-		Agent->DoJob();
-	}
-	std::cout <<ActualCycle << std::endl;
+
+	std::cout << ActualCycle << std::endl;
 	std::cout << Agents.size() << std::endl;
+
+	bool GetCycleData = false;
+	if (ActualCycle % DataCollectionOccurence == 0) {
+		GetCycleData = true;
+	}
+	
+	//Event
 	if (!CyclesEventRegistry[ActualCycle].empty()) {
 		for (auto& Index : CyclesEventRegistry[ActualCycle]) {
 			if (!Events[Index]->AsBegin) {
@@ -37,6 +34,21 @@ void Simulation::ConsummeCycle() {
 			}
 		}
 	}
+	//Agents
+	for (auto& Agent: Agents) {
+		if (GetCycleData) {
+			SimulationsResults[ActualCycle/DataCollectionOccurence]._AgentCycleResult.push_back(Agent->PreviousTurnResult);
+		}
+		Agent->DoJob();
+	}
+	
+	if (GetCycleData) {
+		GameMode* _GameMode = GamePlayStatics::GetGameMode();
+		for (auto& Item : _GameMode->ItemsManager->GetRegistry()) {
+			SimulationsResults[ActualCycle / DataCollectionOccurence]._ItemCycleResult.push_back({Item.Price, Item.ItemName});
+		}
+	}
+	
 	ActualCycle++;
 	if (ActualCycle >= TotalNbrCycles) {
 		EndSimulation();
@@ -44,6 +56,5 @@ void Simulation::ConsummeCycle() {
 }
 
 void Simulation::EndSimulation(){
-
 	SimulationActive = false;
 }

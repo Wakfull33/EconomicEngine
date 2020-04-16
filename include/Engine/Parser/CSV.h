@@ -12,7 +12,7 @@ public:
 
 	static bool IsFileValid(std::string FileName);
 
-	static void Write(std::string DatasPath);
+	static void Write(std::vector<CycleResult>& Results, std::string DatasPath);
 
 	
 private:

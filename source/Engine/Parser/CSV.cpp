@@ -15,7 +15,7 @@ bool CSV::IsFileValid(std::string FileName) {
 	return false;
 }
 
-void CSV::Write(std::string DatasPath){
+void CSV::Write(std::vector<CycleResult>& Results, std::string DatasPath) {
 	// test pour voir sans library csv
 	std::ofstream csv_File;
 	csv_File.open(DatasPath);
@@ -24,6 +24,5 @@ void CSV::Write(std::string DatasPath){
 	csv_File << "1,2,3.456\n";
 	csv_File << "semi;colon";
 	csv_File.close();
-	
-
 }
+

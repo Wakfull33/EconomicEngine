@@ -11,6 +11,8 @@ public:
 	~Engine();
 
 	Simulation* CreateSimulation();
+
+	void EndSimulation(Simulation* _Simulation);
 	
 private:
 

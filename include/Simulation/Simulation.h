@@ -1,8 +1,7 @@
 #pragma once
+#include "Core/StructUtils.h"
 #include <vector>
-#include <chrono>
 
-using Time = std::chrono::time_point<std::chrono::steady_clock>;
 
 class AgentManager;
 class Agent;
@@ -26,6 +25,7 @@ public:
 	std::vector<Agent*> Agents;
 	std::vector<Event*> Events;
 	std::vector<std::vector<int>> CyclesEventRegistry;
+	std::vector<CycleResult> SimulationsResults;
 
 	////////FONCTIONS//////////
 	///

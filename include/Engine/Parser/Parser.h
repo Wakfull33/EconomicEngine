@@ -25,8 +25,8 @@ public:
 		CreateSimulationObjects(_Simulation, SimulationParamtersModel);
 	}
 
-	static void Write(std::string FilePath) {
-		//TODO Titi
+	static void Write(Simulation* _Simulation, std::string FilePath) {
+		T::Write(_Simulation->SimulationsResults, FilePath);
 	}
 	
 	static void RegisterParametersFromData(Simulation* _Simulation, DataModel& Model){
@@ -98,6 +98,13 @@ public:
 			
 			_Simulation->Events.push_back(_Event);
 		}	
+
+		//PreAllocation of memory for cycle result
+		CycleResult _CycleResult;
+		const int NbrCyclesResultsSaved = _Simulation->TotalNbrCycles / _Simulation->DataCollectionOccurence;
+		_CycleResult._AgentCycleResult.reserve(_Simulation->Agents.size());
+		_CycleResult._ItemCycleResult.reserve(SimulationGameMode->ItemsManager->GetRegistrySize());
+		_Simulation->SimulationsResults = std::vector<CycleResult>(NbrCyclesResultsSaved, _CycleResult);
 	}
 };
 

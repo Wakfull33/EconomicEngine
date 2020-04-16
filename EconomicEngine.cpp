@@ -15,6 +15,7 @@ int main()
 	while (EconomicSimulation->SimulationActive) {
 		EconomicSimulation->ConsummeCycle();
 	}
+	EconomicEngine->EndSimulation(EconomicSimulation);
 	delete EconomicSimulation;
 	delete EconomicEngine;
 	EconomicSimulation = nullptr;

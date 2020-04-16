@@ -1,20 +1,22 @@
 #pragma once
+#include "Core/Types.h"
 #include <string>
 #include <vector>
-#include <any>
 
 struct Production {
-	int Item;
+	SafeKeeper<int> Item;
 	int MaxProd;
 	int MinProd;
 
 	friend Production& operator-(Production& Object1, const Production& Object2) {
+		Object1.Item.Restore();
 		Object1.MaxProd -= Object2.MaxProd;
 		Object1.MinProd -= Object2.MinProd;
 		return Object1;
 	}
 
 	friend Production& operator+(Production& Object1, const Production& Object2) {
+		Object1.Item.Set(Object2.Item.Get());
 		Object1.MaxProd += Object2.MaxProd;
 		Object1.MinProd += Object2.MinProd;
 		return Object1;
@@ -22,17 +24,20 @@ struct Production {
 };
 
 struct Consommation {
-	int Item;
+	
+	SafeKeeper<int>Item;
 	int MaxConsum;
 	int MinConsum;
 
 	friend Consommation& operator-(Consommation& Object1, const Consommation& Object2) {
+		Object1.Item.Restore();
 		Object1.MaxConsum -= Object2.MaxConsum;
 		Object1.MinConsum -= Object2.MinConsum;
 		return Object1;
 	}
 
 	friend Consommation& operator+(Consommation& Object1, const Consommation& Object2) {
+		Object1.Item.Set(Object2.Item.Get());
 		Object1.MaxConsum += Object2.MaxConsum;
 		Object1.MinConsum += Object2.MinConsum;
 		return Object1;
@@ -151,14 +156,28 @@ struct DataModel {
 	std::vector<ItemModel> ItemModels;
 	std::vector<EventModel> EventModels;
 	std::vector<std::pair<std::string, int>> NbrAgentsPerModels;
-	
-	
+
 };
 
-
-struct TradeModel
-{
+struct TradeModel{
 	class Agent* owner;
 	int Item;
 	int Quantity;
+};
+
+struct AgentCycleResult {
+	bool AsWork;
+	bool AsTrade;
+	int Profit;
+	std::string Job;
+};
+
+struct ItemCycleResult {
+	float PriceFluctuation;
+	std::string Item;
+};
+
+struct CycleResult {
+	std::vector<AgentCycleResult> _AgentCycleResult;
+	std::vector<ItemCycleResult> _ItemCycleResult;
 };

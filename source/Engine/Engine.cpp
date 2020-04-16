@@ -3,6 +3,7 @@
 #include "Core/GameplayStatics.h"
 #include "Engine/Parser/Json.h"
 #include "Engine/Parser/Parser.h"
+#include "Engine/Parser/CSV.h"
 
 
 Engine::Engine() {
@@ -17,6 +18,10 @@ Simulation* Engine::CreateSimulation() {
 	Parser<Json>::InitSimulationFromFile(EconomicSimulation, "../json/datas.json", "../json/parameters.json");
 	EconomicSimulation->SimulationActive = true;
 	return EconomicSimulation;
+}
+
+void Engine::EndSimulation(Simulation* _Simulation) {
+	Parser<CSV>::Write(_Simulation, _Simulation->OutputFilePath);
 }
 
 

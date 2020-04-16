@@ -1,7 +1,8 @@
 #pragma once
+#include "Core/StructUtils.h"
 #include <vector>
 
-class AgentModel;
+
 
 class Agent{
 
@@ -16,6 +17,7 @@ public:
 	std::pair<bool, int> HasTool(const int item);
 	
 	int Job;
+	AgentCycleResult PreviousTurnResult;
 	std::vector<int> Inventory;
 	
 };
