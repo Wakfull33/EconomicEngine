@@ -19,6 +19,7 @@ set (HEADERS
     ${HEADER_DIR}/Simulation/Event.h
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/ObjectManager.h
+    ${HEADER_DIR}/Simulation/TradeManager.h
     ${HEADER_DIR}/Simulation/Agent/Agent.h
     ${HEADER_DIR}/Simulation/Global/GameMode.h
 )
@@ -36,7 +37,7 @@ set (SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_auto_type)
-target_include_directories(${PROJECT_NAME} 
+target_include_directories(${PROJECT_NAME}
   PUBLIC
     $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${HEADER_DIR}>

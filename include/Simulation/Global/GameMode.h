@@ -1,5 +1,6 @@
 #pragma once
 #include "Simulation/ObjectManager.h"
+#include "Simulation/TradeManager.h"
 #include "Core/StructUtils.h"
 #include <vector>
 
@@ -13,6 +14,7 @@ public:
 	unsigned int NbrCycles = 0;
 	ObjectManager<AgentModel>* AgentsManager = nullptr;
 	ObjectManager<ItemModel>* ItemsManager = nullptr;
+	TradeManager* TradeManager = nullptr;
 
 	
 private:

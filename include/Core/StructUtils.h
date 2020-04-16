@@ -154,3 +154,11 @@ struct DataModel {
 	
 	
 };
+
+
+struct TradeModel
+{
+	class Agent* owner;
+	int Item;
+	int Quantity;
+};
