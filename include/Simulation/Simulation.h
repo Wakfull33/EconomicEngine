@@ -14,11 +14,15 @@ public:
 
 	////////VARIABLES///////////
 
-	
-	int TotalNbrCycles;
-	int ActualCycle;
-
 	bool SimulationActive;
+	bool CollectData;
+	
+	int ActualCycle = 0;
+	int TotalNbrCycles;
+	int DataCollectionOccurence;
+
+	std::string OutputFilePath;
+	
 	std::vector<Agent*> Agents;
 	std::vector<Event*> Events;
 	std::vector<std::vector<int>> CyclesEventRegistry;

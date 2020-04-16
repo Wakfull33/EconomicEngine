@@ -58,11 +58,23 @@ struct AgentModel {
 		return false;
 	}
 
+	friend bool operator==(const AgentModel& Model1, const std::string& Name) {
+		if (Model1.JobName == Name) {
+			return true;
+		}
+		return false;
+	}
+
+	friend bool operator!=(const AgentModel& Model1, const std::string& Name) {
+		return !(Model1 == Name);
+	}
+
 	friend bool operator!=(const AgentModel& Model1, const AgentModel& Model2) {
 		return !(Model1 == Model2);
 	}
 
 	friend AgentModel& operator+(AgentModel& Object1, const AgentModel& Object2) {
+		
 		Object1.AgentProd = Object1.AgentProd + Object2.AgentProd;
 		Object1.AgentConsum = Object1.AgentConsum + Object2.AgentConsum;
 		return Object1;
@@ -141,4 +153,12 @@ struct DataModel {
 	std::vector<std::pair<std::string, int>> NbrAgentsPerModels;
 	
 	
+};
+
+
+struct TradeModel
+{
+	class Agent* owner;
+	int Item;
+	int Quantity;
 };

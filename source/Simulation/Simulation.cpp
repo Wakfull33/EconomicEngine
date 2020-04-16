@@ -10,7 +10,9 @@ Simulation::Simulation(){
 
 
 Simulation::~Simulation() {
-	//Entities.clear();
+	Agents.clear();
+	Events.clear();
+	CyclesEventRegistry.clear();
 }
 
 //void Simulation::InitSimulation(){
@@ -19,8 +21,12 @@ Simulation::~Simulation() {
 //}
 
 void Simulation::ConsummeCycle() {
-
-
+	
+	for (auto& Agent: Agents) {
+		Agent->DoJob();
+	}
+	std::cout <<ActualCycle << std::endl;
+	std::cout << Agents.size() << std::endl;
 	if (!CyclesEventRegistry[ActualCycle].empty()) {
 		for (auto& Index : CyclesEventRegistry[ActualCycle]) {
 			if (!Events[Index]->AsBegin) {
