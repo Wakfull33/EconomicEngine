@@ -38,11 +38,11 @@ public:
 		_Simulation->CyclesEventRegistry = std::vector<std::vector<int>>(_Simulation->TotalNbrCycles, std::vector<int>());
 		SimulationGameMode->ItemsManager = new ObjectManager<ItemModel>;
 		for (auto& _ItemModel : Model.ItemModels) {
-			ObjectManager<ItemModel>::Register(_ItemModel);
+			SimulationGameMode->ItemsManager->Register(_ItemModel);
 		}
 		SimulationGameMode->AgentsManager = new ObjectManager<AgentModel>;
 		for (auto& _AgentModel : Model.AgentModels){
-			ObjectManager<AgentModel>::Register(_AgentModel);
+			SimulationGameMode->AgentsManager->Register(_AgentModel);
 		}
 	}
 
