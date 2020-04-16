@@ -15,7 +15,11 @@ set (HEADERS
     ${HEADER_DIR}/Engine/Engine.h
     ${HEADER_DIR}/Engine/Parser/Parser.h
     ${HEADER_DIR}/Engine/Parser/Json.h
+    ${HEADER_DIR}/Engine/Parser/CSV.h
     ${HEADER_DIR}/Engine/Parser/Librairy/json.hpp
+    ${HEADER_DIR}/Engine/Parser/Librairy/dsv_filter.hpp
+    ${HEADER_DIR}/Engine/Parser/Librairy/strtk.hpp
+    ${HEADER_DIR}/Engine/Parser/Librairy/exprtk.hpp
     ${HEADER_DIR}/Simulation/Event.h
     ${HEADER_DIR}/Simulation/Simulation.h
     ${HEADER_DIR}/Simulation/ObjectManager.h
@@ -27,6 +31,7 @@ set (SOURCES
     ${SOURCE_DIR}/Core/GameplayStatics.cpp
     ${SOURCE_DIR}/Engine/Engine.cpp
     ${SOURCE_DIR}/Engine/Parser/Json.cpp
+    ${SOURCE_DIR}/Engine/Parser/CSV.cpp
     ${SOURCE_DIR}/Simulation/Event.cpp
     ${SOURCE_DIR}/Simulation/Simulation.cpp
     ${SOURCE_DIR}/Simulation/Agent/Agent.cpp
