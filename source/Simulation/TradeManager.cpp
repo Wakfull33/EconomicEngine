@@ -57,4 +57,6 @@ void TradeManager::ResolveTrades(){
 			}
 		}
 	}
+	AsksRegistry.clear();
+	BidsRegistry.clear();
 }

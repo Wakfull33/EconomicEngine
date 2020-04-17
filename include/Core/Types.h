@@ -7,7 +7,7 @@ public:
 	ValKeeper() = default;
 	
 	ValKeeper(T Value)
-		: ActualValue(Value){
+		: ActualValue(Value), PrecedentValue(T()){
 	}
 
 	const T& Get() const {

@@ -44,6 +44,7 @@ public:
 		for (auto& _AgentModel : Model.AgentModels){
 			SimulationGameMode->AgentsManager->Register(_AgentModel);
 		}
+		SimulationGameMode->TradeManager = new TradeManager();
 	}
 
 	static void CreateSimulationObjects(Simulation* _Simulation, DataModel& Model) {

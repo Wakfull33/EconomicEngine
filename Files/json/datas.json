@@ -98,64 +98,64 @@
                     "ConsumeOffset": {
                         "MaxOffset": 0,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 3
                     },
                     "JobImpacted": "Farmer",
                     "ProductionOffset": {
                         "MaxOffset": -2,
                         "MinOffset": -1,
-                        "item": 0
+                        "item": 2
                     },
                     "ToolOffset": {
                         "BreakingOffset": 0,
-                        "item": 0
+                        "item": 6
                     }
                 },
                 {
                     "ConsumeOffset": {
                         "MaxOffset": 0,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 3
                     },
                     "JobImpacted": "Miner",
                     "ProductionOffset": {
-                        "MaxOffset": 1,
+                        "MaxOffset": 0,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 4
                     },
                     "ToolOffset": {
                         "BreakingOffset": 0,
-                        "item": 0
+                        "item": 6
                     }
                 },
                 {
                     "ConsumeOffset": {
                         "MaxOffset": 1,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 4
                     },
                     "JobImpacted": "Refiner",
                     "ProductionOffset": {
                         "MaxOffset": 1,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 5
                     },
                     "ToolOffset": {
                         "BreakingOffset": 0,
-                        "item": 0
+                        "item": 6
                     }
                 },
                 {
                     "ConsumeOffset": {
                         "MaxOffset": 0,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 5
                     },
                     "JobImpacted": "Blacksmith",
                     "ProductionOffset": {
                         "MaxOffset": 5,
                         "MinOffset": 0,
-                        "item": 0
+                        "item": 6
                     },
                     "ToolOffset": {
                         "BreakingOffset": 0,
@@ -183,11 +183,11 @@
                     "ProductionOffset": {
                         "MaxOffset": -6,
                         "MinOffset": -6,
-                        "item": 0
+                        "item": 3
                     },
                     "ToolOffset": {
                         "BreakingOffset": 0,
-                        "item": 0
+                        "item": 6
                     }
                 }
             ],
