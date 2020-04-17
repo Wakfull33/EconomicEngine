@@ -1,39 +1,70 @@
 {
     "ItemTypes": 
         [
-
+			{
+				"ItemName" : "None",
+				"ItemPrice" : 0
+			},
+			{
+				"ItemName" : "Gold",
+				"ItemPrice" : 1
+			},
+			{
+				"ItemName" : "Food",
+				"ItemPrice" : 5
+			},
+			{
+				"ItemName" : "wood",
+				"ItemPrice" : 2
+			},
+			{
+				"ItemName" : "ore",
+				"ItemPrice" : 7
+			},
+			{
+				"ItemName" : "metal",
+				"ItemPrice" : 10
+			},
+			{
+				"ItemName" : "tool",
+				"ItemPrice" : 12
+			}
         ],
     "AgentTypes":
         [
             {
                 "job": "Farmer",
-                "produce": {"item":0, "max":4, "min":2},
-                "consume": {"item":0, "max":1, "min":1},
-                "tool": {"item":0, "breaking":0.1}
+                "produce": {"item":2, "max":4, "min":2},
+                "consume": {"item":3, "max":1, "min":1},
+                "tool": {"item":6, "breaking":0.1},
+				"startGold" : 500,
             },
             {
                 "job": "Miner",
-                "produce": {"item": 1, "max":4, "min":2},
-                "consume": {"item": 2, "max":0, "min":0},
-                "tool": {"item":0, "breaking":0.1}
+                "produce": {"item": 4, "max":4, "min":2},
+                "consume": {"item": 3, "max":0, "min":0},
+                "tool": {"item":6, "breaking":0.1},
+				"startGold" : 500,
             },
             {
                 "job": "Refiner",
-                "produce": {"item":0, "max":4, "min":2},
-                "consume": {"item":0, "max":1, "min":1},
-                "tool": {"item":0, "breaking":0.1}
+                "produce": {"item":5, "max":4, "min":2},
+                "consume": {"item":4, "max":1, "min":1},
+                "tool": {"item":6, "breaking":0.1},
+				"startGold" : 500,
             },
             {
                 "job": "Woodcutter",
-                "produce": {"item":0, "max":2, "min":1},
+                "produce": {"item":3, "max":2, "min":1},
                 "consume": {"item":0, "max":0, "min":0},
-                "tool": {"item":0, "breaking":0.1}
+                "tool": {"item":6, "breaking":0.1},
+				"startGold" : 500,
             },
             {
                 "job": "Blacksmith",
-                "produce": {"item":0, "max":0, "min":0},
-                "consume": {"item":0, "max":0, "min":0},
-                "tool": {"item":0, "breaking":0.1}
+                "produce": {"item":6, "max":0, "min":0},
+                "consume": {"item":5, "max":0, "min":0},
+                "tool": {"item":0, "breaking":0}
             }
         ],
     "Events": 

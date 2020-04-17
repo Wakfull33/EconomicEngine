@@ -6,8 +6,13 @@
 
 Agent::Agent(int _Job)
 	: Job(_Job){
-	//TODO Thomas / Allocate the size and init all the arrays value to 0;
+	Inventory = std::vector<int>(GameMode::Get()->ItemsManager->GetRegistrySize(), 0);
+	PreviousTurnResult.Job = GameMode::Get()->AgentsManager->GetObject(Job).JobName;
 }
+
+
+//TODO Benoit / Reset la struct de fin de cycle de l'agent en debut du prochain apres que l'agent est tout analysé de son precedent tour
+
 
 void Agent::DoJob() {
 	const AgentModel& agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
@@ -17,7 +22,7 @@ void Agent::DoJob() {
 	int ressources = ItemCount(agentModel.AgentConsum.Item.Get());
 	bool toolCheck = HasTool(jobTool.Item);
 
-	int food = 1;
+	int food = GameMode::Get()->ItemsManager->GetObjectIndexByString("Food");;
 
 	if (ItemCount(food) > 0)
 	{
@@ -71,7 +76,7 @@ void Agent::DoJob() {
 	}
 	else
 	{
-		//Todo Thomas / Il devrait crever plutot ou a la rigueur il doit perdre autre chose
+		//Todo Thomas / Handle Death
 		PreviousTurnResult.AsWork = false;
 	}
 }
@@ -82,7 +87,7 @@ void Agent::DoTrade()
 	int itemConsum = agentModel.AgentConsum.Item.Get();
 	int itemProd = agentModel.AgentProd.Item.Get();
 	int itemCountNeeded = agentModel.AgentConsum.MaxConsum;
-	int food = 1;
+	int food = GameMode::Get()->ItemsManager->GetObjectIndexByString("Food");
 
 	#pragma region Ask
 	if (ItemCount(food) > 0)
@@ -94,7 +99,6 @@ void Agent::DoTrade()
 				GameMode::Get()->TradeManager->RegisterAsk({
 					this,
 					itemConsum,
-					//Todo Thomas / Fais plutot ItemCountNeeded - ItemCount(ItemConsum) car la tu vas te retrouver avec des nombres negatifs
 					ItemCount(itemConsum) - itemCountNeeded,
 					0,
 					false
@@ -103,7 +107,6 @@ void Agent::DoTrade()
 		}
 		else
 		{
-			//Todo Thomas / meme si il a pas son tool il doit aussi acheter pour sa consommation au prochain tour
 			GameMode::Get()->TradeManager->RegisterAsk({
 				this,
 				agentModel.AgentJobTool.Item,
@@ -141,4 +144,17 @@ int Agent::ItemCount(const int itemWanted)
 bool Agent::HasTool(const int tool)
 {
 	return ItemCount(tool) > 0 ? true : false;
+}
+
+void Agent::TradeEnd(bool IsBuyer, TradeModel& Transaction) {
+	
+	const ItemModel& _ItemModel = GameMode::Get()->ItemsManager->GetObject(Transaction.Item);
+	if (IsBuyer) {
+		PreviousTurnResult.AsBuy = true;
+		PreviousTurnResult.Profit -= (_ItemModel.Price*Transaction.Exchanged);
+	}
+	else {
+		PreviousTurnResult.AsSell = true;
+		PreviousTurnResult.Profit += (_ItemModel.Price*Transaction.Exchanged);
+	}
 }

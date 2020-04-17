@@ -12,6 +12,7 @@ public:
 	
 	void DoJob();
 	void DoTrade();
+	void TradeEnd(bool IsBuyer, TradeModel& Transaction);
 	int ItemCount(const int itemWanted);
 	bool HasTool(const int tool);
 

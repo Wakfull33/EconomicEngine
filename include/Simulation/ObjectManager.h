@@ -17,6 +17,14 @@ public:
 		return ObjectRegistry[index];
 	}
 
+	int GetObjectIndexByString(const std::string& LookingObject) {
+		auto iterator = std::find(GetRegistry().begin(), GetRegistry().end(), LookingObject);
+		if (iterator != GetRegistry().end()) {
+			return iterator - GetRegistry().begin();
+		}
+		return -1;
+	}
+
 	int GetRegistrySize() {
 		return ObjectRegistry.size();
 	}

@@ -52,9 +52,11 @@ public:
 		for (auto& NbrAgent : Model.NbrAgentsPerModels) {
 			auto Registry = SimulationGameMode->AgentsManager->GetRegistry();
 			auto iterator = std::find(Registry.begin(), Registry.end(), NbrAgent.first);
+			const int GoldIndex = SimulationGameMode->ItemsManager->GetObjectIndexByString("Gold");
 			if (iterator != Registry.end()) {
 				for (int i = 0; i < NbrAgent.second; i++) {
 					Agent* _Agent = new Agent(iterator - Registry.begin());
+					_Agent->Inventory[GoldIndex] = iterator->StartGold;
 					_Simulation->Agents.push_back(_Agent);
 				}
 			}	

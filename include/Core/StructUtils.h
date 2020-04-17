@@ -55,6 +55,7 @@ struct AgentModel {
 	Production AgentProd;
 	Consommation AgentConsum;
 	JobTool AgentJobTool;
+	int StartGold;
 
 	friend bool operator==(const AgentModel& Model1, const AgentModel& Model2){
 		if (Model1.JobName == Model2.JobName) {
@@ -97,13 +98,24 @@ struct AgentModel {
 struct ItemModel {
 	
 	std::string ItemName;
-	float Price;
+	int Price;
 
 	friend bool operator==(const ItemModel& Item1, const ItemModel& Item2) {
 		if (Item1.ItemName == Item2.ItemName) {
 			return true;
 		}
 		return false;
+	}
+
+	friend bool operator==(const ItemModel& Item1, const std::string& LookingName) {
+		if (Item1.ItemName == LookingName) {
+			return true;
+		}
+		return false;
+	}
+
+	friend bool operator!=(const ItemModel& Item1, const std::string& LookingName) {
+		return !(Item1 == LookingName);
 	}
 	
 	friend bool operator!=(const ItemModel& Item1, const ItemModel& Item2) {
@@ -168,9 +180,9 @@ struct TradeModel{
 };
 
 struct AgentCycleResult {
-	bool AsWork;
-	bool AsTrade;
-	int Profit;
+	bool AsBuy = false;
+	bool AsSell = false;
+	int Profit = 0;
 	std::string Job;
 };
 

@@ -25,8 +25,8 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 		//ItemsTypes
 		auto ItemTypes = j_Data["ItemTypes"];
 		for (int i = 0; i < ItemTypes.size(); i++) {
-			/*ItemModel _ItemModel = { ItemTypes.at(i)["ItemName"], ItemTypes.at(i)["ItemPrice"]};
-			_DataModel.ItemModels.push_back(_ItemModel);*/
+			ItemModel _ItemModel = { ItemTypes.at(i)["ItemName"], ItemTypes.at(i)["ItemPrice"]};
+			_DataModel.ItemModels.push_back(_ItemModel);
 		}
 		//AgentTypes
 		auto AgentTypes = j_Data["AgentTypes"];
@@ -36,6 +36,7 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 			agentModel.AgentProd = { ValKeeper<int>(AgentTypes.at(i)["produce"]["item"]),AgentTypes.at(i)["produce"]["max"],AgentTypes.at(i)["produce"]["min"]};
 			agentModel.AgentConsum = { ValKeeper<int>(AgentTypes.at(i)["consume"]["item"]),AgentTypes.at(i)["consume"]["max"],AgentTypes.at(i)["consume"]["min"]};
 			agentModel.AgentJobTool = { AgentTypes.at(i)["tool"]["item"],AgentTypes.at(i)["tool"]["breaking"]};
+			agentModel.StartGold = AgentTypes.at(i)["startGold"];
 			_DataModel.AgentModels.push_back(agentModel);
 		}
 		//Event
@@ -56,12 +57,13 @@ DataModel Json::Read(std::string DatasPath, std::string ParametersPath){
 				_AgentModel.AgentProd = { ValKeeper<int>(AgentTypesImpacted.at(j)["ProductionOffset"]["item"]),AgentTypesImpacted.at(j)["ProductionOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ProductionOffset"]["MinOffset"] };
 				_AgentModel.AgentConsum = { ValKeeper<int>(AgentTypesImpacted.at(j)["ConsumeOffset"]["item"]),AgentTypesImpacted.at(j)["ConsumeOffset"]["MaxOffset"],AgentTypesImpacted.at(j)["ConsumeOffset"]["MinOffset"] };
 				_AgentModel.AgentJobTool = { AgentTypesImpacted.at(j)["ToolOffset"]["item"],AgentTypesImpacted.at(j)["ToolOffset"]["BreakingOffset"] };
+				_AgentModel.StartGold = 0;
 				_EventModel.AgentsModelImpacted.push_back(_AgentModel);
 			}
 			auto ItemsImpacted = Events.at(i)["ItemsImpacted"];
 			for (int j = 0; j < ItemsImpacted.size(); j++) {
-				/*ItemModel _ItemModel = { ItemsImpacted.at(j)["ItemName"], ItemsImpacted.at(j)["PriceOffset"] };
-				_EventModel.ItemsModelImpacted.push_back(_ItemModel);*/
+				ItemModel _ItemModel = { ItemsImpacted.at(j)["ItemName"], ItemsImpacted.at(j)["PriceOffset"] };
+				_EventModel.ItemsModelImpacted.push_back(_ItemModel);
 			}
 			_DataModel.EventModels.push_back(_EventModel);
 		}

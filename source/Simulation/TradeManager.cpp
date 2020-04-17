@@ -12,10 +12,11 @@ void TradeManager::RegisterAsk(const TradeModel& trade) {
 }
 
 void TradeManager::ResolveTrades(){
+	
 	for (auto& ask : AsksRegistry)
 	{
 		int PriceWanted = ask.owner->belief.first;
-		int ItemPrice = GameMode::Get()->ItemsManager->GetObject(ask.Item).Price;
+		const int ItemPrice = GameMode::Get()->ItemsManager->GetObject(ask.Item).Price;
 
 		int it = 0;
 		while(!ask.Resolved || PriceWanted < ask.owner->belief.second)
@@ -32,6 +33,8 @@ void TradeManager::ResolveTrades(){
 						BidsRegistry[it].owner->Inventory[ask.Item] -= BidsRegistry[it].Quantity;
 						BidsRegistry[it].Exchanged = BidsRegistry[it].Quantity;
 						BidsRegistry[it].Resolved = true;
+						ask.owner->TradeEnd(true, ask);
+						BidsRegistry[it].owner->TradeEnd(false, BidsRegistry[it]);
 					}
 					else
 					{
@@ -41,6 +44,8 @@ void TradeManager::ResolveTrades(){
 						ask.owner->Inventory[it] += ask.Quantity;
 						ask.Exchanged += ask.Quantity;
 						ask.Resolved = true;
+						ask.owner->TradeEnd(true, ask);
+						BidsRegistry[it].owner->TradeEnd(false, BidsRegistry[it]);
 					}
 				}
 				++it;
