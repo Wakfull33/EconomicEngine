@@ -17,6 +17,7 @@ public:
 	bool HasTool(const int tool);
 
 	std::pair<int, int> belief;
+	int sellBelief;
 	
 	int Job;
 	AgentCycleResult PreviousTurnResult;

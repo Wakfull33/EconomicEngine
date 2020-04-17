@@ -130,7 +130,44 @@ void Agent::DoTrade()
 
 void Agent::UpdatePrice()
 {
-	if (true);
+	const AgentModel& agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
+	const ItemModel& itemProdModel = GameMode::Get()->ItemsManager->GetObject(agentModel.AgentProd.Item.Get());
+
+	if(PreviousTurnResult.HasBuy)
+	{
+		if (PreviousTurnResult.Profit > 0)
+		{
+			belief.first += 5;
+		}
+		else
+		{
+			belief.first -= 5;
+		}
+	}
+	else
+	{
+		belief.first -= 10;
+	}
+
+	
+	if(PreviousTurnResult.HasSell)
+	{
+		if (PreviousTurnResult.Profit > 0)
+		{
+			sellBelief += 5;
+		}
+		else
+		{
+			sellBelief -= 5;
+		}
+	}
+	else
+	{
+		sellBelief -= 10;
+	}
+
+	std::clamp(belief.first, 0, belief.second);
+	std::clamp(sellBelief, static_cast<int>(itemProdModel.Price * 0.7), static_cast<int>(itemProdModel.Price * 1.3));
 }
 
 int Agent::ItemCount(const int itemWanted)
