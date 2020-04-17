@@ -2,29 +2,29 @@
     "AgentsInitList": [
         {
             "class": "Farmer",
-            "quantity": 5
+            "quantity": 1
         },
         {
             "class": "Miner",
-            "quantity": 5
+            "quantity": 1
         },
         {
             "class": "Refiner",
-            "quantity": 5
+            "quantity": 1
         },
         {
             "class": "Woodcutter",
-            "quantity": 5
+            "quantity": 1
         },
         {
             "class": "Blacksmith",
-            "quantity": 5
+            "quantity": 1
         }
     ],
     "SimulationConfig": {
         "DataCollected": true,
         "DataCollectionOccurence": 1,
-        "NombreCycles": 500,
+        "NombreCycles": 10,
         "OutputFile": "../Files/CSV/DataOut.csv"
     }
 }

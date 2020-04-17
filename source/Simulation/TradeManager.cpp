@@ -15,15 +15,15 @@ void TradeManager::ResolveTrades(){
 	
 	for (auto& ask : AsksRegistry)
 	{
-		int PriceWanted = ask.owner->belief.first;
+		int PriceWanted = ask.owner->buyBelief.first;
 		const int ItemPrice = GameMode::Get()->ItemsManager->GetObject(ask.Item).Price;
 
 		int it = 0;
-		while(!ask.Resolved || PriceWanted < ask.owner->belief.second)
+		while(PriceWanted < ask.owner->buyBelief.second && !ask.Resolved)
 		{
 			if(it < BidsRegistry.size())
 			{
-				if (!BidsRegistry[it].Resolved && BidsRegistry[it].Item == ask.Item && ItemPrice <= ask.owner->belief.first)
+				if (!BidsRegistry[it].Resolved && BidsRegistry[it].Item == ask.Item && ItemPrice <= ask.owner->buyBelief.first)
 				{
 					if (ask.Quantity >= BidsRegistry[it].Quantity)
 					{

@@ -17,7 +17,7 @@ void Simulation::ConsummeCycle() {
 
 	std::cout << ActualCycle << std::endl;
 	std::cout << Agents.size() << std::endl;
-
+	GameMode* _GameMode = GamePlayStatics::GetGameMode();
 	bool GetCycleData = false;
 	if (ActualCycle % DataCollectionOccurence == 0) {
 		GetCycleData = true;
@@ -39,13 +39,11 @@ void Simulation::ConsummeCycle() {
 		if (GetCycleData) {
 			SimulationsResults[ActualCycle/DataCollectionOccurence]._AgentCycleResult.push_back(Agent->PreviousTurnResult);
 		}
-		Agent->UpdatePrice();
-		Agent->DoJob();
-		Agent->DoTrade();
+		Agent->DoLife();
 	}
-	
+	_GameMode->TradeManager->ResolveTrades();
 	if (GetCycleData) {
-		GameMode* _GameMode = GamePlayStatics::GetGameMode();
+		
 		for (auto& Item : _GameMode->ItemsManager->GetRegistry()) {
 			SimulationsResults[ActualCycle / DataCollectionOccurence]._ItemCycleResult.push_back({Item.Price, Item.ItemName});
 		}
