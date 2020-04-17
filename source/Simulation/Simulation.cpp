@@ -26,6 +26,7 @@ void Simulation::ConsummeCycle() {
 	
 	//Event
 	if (!CyclesEventRegistry[ActualCycle].empty()) {
+		std::cout << "Events Happened" << std::endl;
 		for (auto& Index : CyclesEventRegistry[ActualCycle]) {
 			if (!Events[Index]->AsBegin) {
 				Events[Index]->EventStart();

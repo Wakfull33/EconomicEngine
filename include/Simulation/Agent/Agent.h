@@ -15,7 +15,6 @@ public:
 	float sellBelief;
 	std::pair<float, float> buyBelief;
 
-
 	bool NeededToBuy = false;
 	bool IsDead = false;
 	int Job;

@@ -77,10 +77,28 @@ public:
 			
 			if (_Event->Model.Recurrent) {
 				int NextTurnOccurence = _Event->Model.OccurenceCycle;
-				while (NextTurnOccurence < _Simulation->TotalNbrCycles) {
-					_Simulation->CyclesEventRegistry[NextTurnOccurence].push_back(i);
+				if (NextTurnOccurence < _Simulation->TotalNbrCycles) {
+					while (NextTurnOccurence < _Simulation->TotalNbrCycles) {
+						_Simulation->CyclesEventRegistry[NextTurnOccurence].push_back(i);
+						if (_Event->Model.Temporary) {
+							const int EventEnd = NextTurnOccurence + _Event->Model.EventDuration;
+							if (EventEnd > _Simulation->TotalNbrCycles - 1) {
+								_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles - 1].push_back(i);
+							}
+							else {
+								_Simulation->CyclesEventRegistry[EventEnd].push_back(i);
+							}
+						}
+						NextTurnOccurence += _Event->Model.CyclesSpacing;
+					}
+					
+				}
+			}
+			else {
+				if (_Event->Model.OccurenceCycle < _Simulation->TotalNbrCycles) {
+					_Simulation->CyclesEventRegistry[_Event->Model.OccurenceCycle].push_back(i);
 					if (_Event->Model.Temporary) {
-						const int EventEnd = NextTurnOccurence + _Event->Model.EventDuration;
+						const int EventEnd = _Event->Model.OccurenceCycle + _Event->Model.EventDuration;
 						if (EventEnd > _Simulation->TotalNbrCycles - 1) {
 							_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles - 1].push_back(i);
 						}
@@ -88,20 +106,8 @@ public:
 							_Simulation->CyclesEventRegistry[EventEnd].push_back(i);
 						}
 					}
-					NextTurnOccurence += _Event->Model.CyclesSpacing;
 				}
-			}
-			else {
-				_Simulation->CyclesEventRegistry[_Event->Model.OccurenceCycle].push_back(i);
-				if (_Event->Model.Temporary) {
-					const int EventEnd = _Event->Model.OccurenceCycle + _Event->Model.EventDuration;
-					if (EventEnd > _Simulation->TotalNbrCycles - 1) {
-						_Simulation->CyclesEventRegistry[_Simulation->TotalNbrCycles - 1].push_back(i);
-					}
-					else {
-						_Simulation->CyclesEventRegistry[EventEnd].push_back(i);
-					}
-				}
+				
 			}
 
 			_Event->AgentsSignal.Connect(SimulationGameMode->AgentsManager, &ObjectManager<AgentModel>::UpdateObjectsFromEvent);

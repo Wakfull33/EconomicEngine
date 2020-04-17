@@ -91,9 +91,115 @@
             }
         }
     ],
-    "Events": [
-        
-    ],
+  "Events": [
+    {
+      "AgentTypesImpacted": [
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 3
+          },
+          "JobImpacted": "Farmer",
+          "ProductionOffset": {
+            "MaxOffset": -2,
+            "MinOffset": -1,
+            "item": 2
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        },
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 3
+          },
+          "JobImpacted": "Miner",
+          "ProductionOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 4
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        },
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 1,
+            "MinOffset": 0,
+            "item": 4
+          },
+          "JobImpacted": "Refiner",
+          "ProductionOffset": {
+            "MaxOffset": 1,
+            "MinOffset": 0,
+            "item": 5
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        },
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 5
+          },
+          "JobImpacted": "Blacksmith",
+          "ProductionOffset": {
+            "MaxOffset": 5,
+            "MinOffset": 0,
+            "item": 6
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 0
+          }
+        }
+      ],
+      "EventCycleOccurence": 100,
+      "EventCyclesSpacing": 0,
+      "EventDuration": 50,
+      "EventIsRecurrent": false,
+      "EventIsTemporary": true,
+      "EventName": "War",
+      "ItemsImpacted": []
+    },
+    {
+      "AgentTypesImpacted": [
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 0
+          },
+          "JobImpacted": "WoodCutter",
+          "ProductionOffset": {
+            "MaxOffset": -6,
+            "MinOffset": -6,
+            "item": 3
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        }
+      ],
+      "EventCycleOccurence": 10,
+      "EventCyclesSpacing": 0,
+      "EventDuration": 2,
+      "EventIsRecurrent": false,
+      "EventIsTemporary": true,
+      "EventName": "NoWood",
+      "ItemsImpacted": []
+    }
+  ],
     "ItemTypes": [
         {
             "ItemName": "None",
