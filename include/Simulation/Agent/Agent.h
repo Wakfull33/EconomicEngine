@@ -11,12 +11,14 @@ public:
 	~Agent() = default;
 	
 	void DoJob();
+	void UpdatePrice();
 	void DoTrade();
 	void TradeEnd(bool IsBuyer, TradeModel& Transaction);
 	int ItemCount(const int itemWanted);
 	bool HasTool(const int tool);
 
 	std::pair<int, int> belief;
+	int sellBelief;
 	
 	int Job;
 	AgentCycleResult PreviousTurnResult;

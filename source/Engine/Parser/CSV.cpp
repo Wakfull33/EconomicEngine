@@ -21,11 +21,12 @@ void CSV::Write(std::vector<CycleResult>& Results, std::string DatasPath) {
 	if (csv_File.is_open()){
 		for (auto& _CycleResult : Results) {
 			csv_File << "Resultats des agents :\n";
-			csv_File << "JobName, AsWork, AsTrade, AgentProfit\n";
+			csv_File << "JobName, HasWork, HasBuy, HasSell, AgentProfit\n";
 			for (auto& AgentResult : _CycleResult._AgentCycleResult) {
 				csv_File << AgentResult.Job;
-				csv_File << AgentResult.AsWork;
-				csv_File << AgentResult.AsTrade;
+				csv_File << AgentResult.HasWork;
+				csv_File << AgentResult.HasBuy;
+				csv_File << AgentResult.HasSell;
 				csv_File << AgentResult.Profit;
 				csv_File << "\n";
 			}

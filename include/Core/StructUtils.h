@@ -180,9 +180,9 @@ struct TradeModel{
 };
 
 struct AgentCycleResult {
-	bool AsBuy = false;
-	bool AsSell = false;
-	int Profit = 0;
+	bool HasBuy;
+	bool HasSell;
+	int Profit;
 	std::string Job;
 };
 

@@ -11,7 +11,6 @@ Agent::Agent(int _Job)
 }
 
 
-//TODO Benoit / Reset la struct de fin de cycle de l'agent en debut du prochain apres que l'agent est tout analysé de son precedent tour
 
 
 void Agent::DoJob() {
@@ -32,24 +31,22 @@ void Agent::DoJob() {
 			{
 				for (int i = 0; i < agentModel.AgentProd.MaxProd; ++i) 
 				{
-					//TODO Thomas / Not gonna work you push back the id of the item at the end of the inventory and not the quantity at the index of the item;
-					Inventory.push_back(agentModel.AgentProd.Item.Get());
+					Inventory[agentModel.AgentProd.Item.Get()] += agentModel.AgentProd.MaxProd;
 				}	
 			}
 			else if (ressources >= agentModel.AgentConsum.MinConsum)
 			{
 				for (int i = 0; i < agentModel.AgentProd.MinProd; ++i) 
 				{
-					//TODO Thomas / Not gonna work you push back the id of the item at the end of the inventory and not the quantity at the index of the item;
-					Inventory.push_back(agentModel.AgentProd.Item.Get());
-				}	
+					Inventory[agentModel.AgentProd.Item.Get()] += agentModel.AgentProd.MinProd;
+				}
 			}
 			else
 			{
-				PreviousTurnResult.AsWork = false;
+				PreviousTurnResult.HasWork = false;
+				return;
 			}
 
-			//TODO Thomas / tu testes quand meme si son objet doit etre cassé meme si il a pas travaillé;
 			std::random_device rd;
 			std::mt19937 gen(rd());
 			std::uniform_real_distribution<> dis(0, 1);
@@ -57,27 +54,26 @@ void Agent::DoJob() {
 				Inventory.erase(Inventory.begin() + jobTool.Item + 1);
 
 			Inventory[food] -= 1;
-			//TODO Thomas / regarde 11 lignes au dessus;
-			PreviousTurnResult.AsWork = true;
+			PreviousTurnResult.HasWork = true;
 		}
 		else
 		{
 			if (ressources >= agentModel.AgentConsum.MinConsum)
 			{
 				Inventory[food] -= 1;
-				//TODO Thomas / tu lui push back son item a nouveau;
-				Inventory.push_back(agentModel.AgentProd.Item.Get());
+				Inventory[agentModel.AgentProd.Item.Get()] += agentModel.AgentProd.MinProd;
 			}
 			else
 			{
-				PreviousTurnResult.AsWork = false;
+				PreviousTurnResult.HasWork = false;
 			}
 		}
 	}
 	else
 	{
-		//Todo Thomas / Handle Death
-		PreviousTurnResult.AsWork = false;
+
+		PreviousTurnResult.HasWork = false;
+
 	}
 }
 
@@ -99,7 +95,7 @@ void Agent::DoTrade()
 				GameMode::Get()->TradeManager->RegisterAsk({
 					this,
 					itemConsum,
-					ItemCount(itemConsum) - itemCountNeeded,
+					itemCountNeeded - ItemCount(itemConsum),
 					0,
 					false
 				});
@@ -134,6 +130,52 @@ void Agent::DoTrade()
 			this, itemProd, ItemCount(itemProd),0, false
 		});
 	}
+}
+
+void Agent::UpdatePrice()
+{
+	
+	if(PreviousTurnResult.HasBuy /*TODO add another bool for NeedBuyPrecedentTurn*/)
+	{
+		if (PreviousTurnResult.Profit < 0)
+		{
+			belief.first -= 5;
+			belief.second -= 10;
+		}
+	}
+	else
+	{
+		//He has no offer for his price so he raised it up to match market price
+		belief.second += 10;
+		belief.first += 5;
+	}
+
+	
+	if(PreviousTurnResult.HasSell)
+	{
+		if (PreviousTurnResult.Profit > 0)
+		{
+			sellBelief += 5;
+		}
+		else
+		{
+			sellBelief -= 5;
+		}
+	}
+	else
+	{
+		sellBelief -= 10;
+	}
+
+	const AgentModel& agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
+	const ItemModel& itemProdModel = GameMode::Get()->ItemsManager->GetObject(agentModel.AgentProd.Item.Get());
+
+	std::clamp(belief.first, 0, belief.second);
+	std::clamp(sellBelief, static_cast<int>(itemProdModel.Price * 0.7), static_cast<int>(itemProdModel.Price * 1.3));
+
+
+	//TODO Benoit / Reset la struct de fin de cycle de l'agent en debut du prochain apres que l'agent est tout analysé de son precedent tour
+
 }
 
 int Agent::ItemCount(const int itemWanted)
