@@ -12,18 +12,19 @@ void TradeManager::RegisterAsk(const TradeModel& trade) {
 }
 
 void TradeManager::ResolveTrades(){
-	
+	//TODO update because belief as change
 	for (auto& ask : AsksRegistry)
 	{
-		int PriceWanted = ask.owner->buyBelief.first;
-		const int ItemPrice = GameMode::Get()->ItemsManager->GetObject(ask.Item).Price;
+		
+		const float ItemPrice = GameMode::Get()->ItemsManager->GetObject(ask.Item).Price;
+		const float PriceMaxWanted = ItemPrice + ask.owner->buyBelief.second * ItemPrice;
 
 		int it = 0;
-		while(PriceWanted < ask.owner->buyBelief.second && !ask.Resolved)
+		while(ask.Price <= PriceMaxWanted && !ask.Resolved)
 		{
 			if(it < BidsRegistry.size())
 			{
-				if (!BidsRegistry[it].Resolved && BidsRegistry[it].Item == ask.Item && ItemPrice <= ask.owner->buyBelief.first)
+				if (!BidsRegistry[it].Resolved && BidsRegistry[it].Item == ask.Item && BidsRegistry[it].Price <= ItemPrice)
 				{
 					if (ask.Quantity >= BidsRegistry[it].Quantity)
 					{
@@ -53,8 +54,8 @@ void TradeManager::ResolveTrades(){
 						ask.Resolved = true;
 						
 					}
-					ask.Quantity -= ask.Exchanged;
-					BidsRegistry[it].Quantity -= BidsRegistry[it].Exchanged;
+					ask.Quantity -= ask.TempExchanged;
+					BidsRegistry[it].Quantity -= BidsRegistry[it].TempExchanged;
 					//Trade End
 					ask.owner->TradeEnd(true, ask);
 					BidsRegistry[it].owner->TradeEnd(false, BidsRegistry[it]);
@@ -64,7 +65,7 @@ void TradeManager::ResolveTrades(){
 			else
 			{
 				it = 0;
-				PriceWanted += 10;
+				ask.Price += 5;
 			}
 		}
 	}

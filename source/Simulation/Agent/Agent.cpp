@@ -11,7 +11,8 @@ Agent::Agent(int _Job)
 	Inventory = std::vector<int>(GameMode::Get()->ItemsManager->GetRegistrySize(), 0);
 	PreviousTurnResult.Job = GameMode::Get()->AgentsManager->GetObject(Job).JobName;
 	Greediness = rand() % MaxGreediness;//Get the agent greediness between 0.5 and 1
-	//TODO Define Base BuyBelief and base SellBelief
+	sellBelief = 0.0f;
+	buyBelief = {0.0f,0.1f};
 }
 
 void Agent::DoLife() {
@@ -31,9 +32,71 @@ void Agent::DoLife() {
 	const int NbrConsumRessource = ItemCount(ItemConsum);
 	const bool toolCheck = HasTool(AgentJobTool.Item);
 
+	
 	//1-------------------------------------------
+	//Price and Gold Update
+	//1-------------------------------------------
+	//TODO Add greediness in price fluctuation
+	//
+	const int GoldIndex = GameMode::Get()->ItemsManager->GetObjectIndexByString("Gold");
+	Inventory[GoldIndex] += PreviousTurnResult.Profit;
+	if (PreviousTurnResult.HasBuy) {
+		if (PreviousTurnResult.Profit < 0) {
+			buyBelief.first -= 0.05f;
+			buyBelief.second -= 0.1f;
+		}
+	}
+	else {
+		//He has no offer for his price so he raised it up to match market price
+		if (NeededToBuy) {
+			buyBelief.second += 0.1f;
+			buyBelief.first += 0.05f;
+		}
+	}
+
+	if (PreviousTurnResult.HasSell) {
+		if (PreviousTurnResult.Profit > 0) {
+			sellBelief += 0.05f;
+		}
+		else {
+			sellBelief -= 0.05f;
+		}
+	}
+	else {
+		sellBelief -= 0.1f;
+	}
+
+	
+	if (buyBelief.first < -0.5f) {
+		buyBelief.first = -0.5f;
+	}
+	else if (buyBelief.first > 0.5) {
+		buyBelief.first = 0.5f;
+	}
+
+	if (buyBelief.second < 0.0f) {
+		buyBelief.second = 0.0f;
+	}
+	else if (buyBelief.second > 1.0) {
+		buyBelief.second = 1.0f;
+	}
+
+	if (sellBelief < -0.5f) {
+		sellBelief = -0.5f;
+	}
+	else if (sellBelief > 0.5) {
+		sellBelief = 0.5f;
+	}
+
+	PreviousTurnResult.HasBuy = false;
+	PreviousTurnResult.HasSell = false;
+	PreviousTurnResult.Profit = 0;
+	NeededToBuy = false;
+
+	
+	//2-------------------------------------------
 	//Food Update
-	//1-------------------------------------------
+	//2-------------------------------------------
 	//
 	const int FoodIndex = GameMode::Get()->ItemsManager->GetObjectIndexByString("Food");
 	Inventory[FoodIndex] += -1;
@@ -43,56 +106,19 @@ void Agent::DoLife() {
 			IsDead = true;
 		}
 		NeededToBuy = true;
+		const float BasePrice = GameMode::Get()->ItemsManager->GetObject(FoodIndex).Price;
 		GameMode::Get()->TradeManager->RegisterAsk( {
 			this,
 			FoodIndex,
+			BasePrice + BasePrice * buyBelief.first,
 			2,
+			0,
 			0,
 			false
 		});
 	}
 
-	//2-------------------------------------------
-	//Price and Gold Update
-	//2-------------------------------------------
-	//TODO Add greediness in price fluctuation
-	//
-	const int GoldIndex = GameMode::Get()->ItemsManager->GetObjectIndexByString("Gold");
-	Inventory[GoldIndex] += PreviousTurnResult.Profit;
-	if (PreviousTurnResult.HasBuy) {
-		if (PreviousTurnResult.Profit < 0) {
-			buyBelief.first -= 5;
-			buyBelief.second -= 10;
-		}
-	}
-	else {
-		//He has no offer for his price so he raised it up to match market price
-		if (NeededToBuy) {
-			buyBelief.second += 10;
-			buyBelief.first += 5;
-		}
-	}
-
-
-	if (PreviousTurnResult.HasSell) {
-		if (PreviousTurnResult.Profit > 0) {
-			sellBelief += 5;
-		}
-		else {
-			sellBelief -= 5;
-		}
-	}
-	else {
-		sellBelief -= 10;
-	}
-
-	buyBelief.first = std::clamp(buyBelief.first, 0, buyBelief.second);
-	sellBelief = std::clamp(sellBelief, static_cast<int>(AgentItemProdModel.Price * 0.7), static_cast<int>(AgentItemProdModel.Price * 1.3));
-
-	PreviousTurnResult.HasBuy = false;
-	PreviousTurnResult.HasSell = false;
-	PreviousTurnResult.Profit = 0;
-	NeededToBuy = false;
+	
 
 	
 	//3----------------------------------------
@@ -126,10 +152,13 @@ void Agent::DoLife() {
 	}
 	else {
 		NeededToBuy = true;
+		const float BasePrice = GameMode::Get()->ItemsManager->GetObject(AgentJobTool.Item).Price;
 		GameMode::Get()->TradeManager->RegisterAsk( {
 			this,
 			AgentJobTool.Item,
+			BasePrice + BasePrice * buyBelief.first,
 			1,
+			0,
 			0,
 			false
 		});
@@ -149,19 +178,25 @@ void Agent::DoLife() {
 	//
 	if (ItemCount(ItemConsum) < AgentConsum.MaxConsum) {
 		NeededToBuy = true;
+		const float BasePrice = GameMode::Get()->ItemsManager->GetObject(ItemConsum).Price;
 		GameMode::Get()->TradeManager->RegisterAsk( {
 			this,
 			ItemConsum,
+			BasePrice + BasePrice * buyBelief.first,
 			AgentConsum.MaxConsum - ItemCount(ItemConsum),
+			0,
 			0,
 			false
 		});
 	}
 	if (ItemCount(ItemProd) > 0) {
+		const float BasePrice = GameMode::Get()->ItemsManager->GetObject(ItemProd).Price;
 		GameMode::Get()->TradeManager->RegisterBid({
 			this,
 			ItemProd,
+			BasePrice + BasePrice * sellBelief,
 			ItemCount(ItemProd),
+			0,
 			0,
 			false
 		});
@@ -172,11 +207,11 @@ void Agent::TradeEnd(bool IsBuyer, TradeModel& Transaction) {
 	const ItemModel& _ItemModel = GameMode::Get()->ItemsManager->GetObject(Transaction.Item);
 	if (IsBuyer) {
 		PreviousTurnResult.HasBuy = true;
-		PreviousTurnResult.Profit -= _ItemModel.Price* Transaction.TempExchanged;
+		PreviousTurnResult.Profit -= Transaction.Price* Transaction.TempExchanged;
 	}
 	else {
 		PreviousTurnResult.HasSell = true;
-		PreviousTurnResult.Profit += _ItemModel.Price* Transaction.TempExchanged;
+		PreviousTurnResult.Profit += Transaction.Price* Transaction.TempExchanged;
 	}
 }
 

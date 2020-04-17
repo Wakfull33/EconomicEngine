@@ -98,7 +98,7 @@ struct AgentModel {
 struct ItemModel {
 	
 	std::string ItemName;
-	int Price;
+	float Price;
 
 	friend bool operator==(const ItemModel& Item1, const ItemModel& Item2) {
 		if (Item1.ItemName == Item2.ItemName) {
@@ -174,6 +174,7 @@ struct DataModel {
 struct TradeModel{
 	class Agent* owner;
 	int Item;
+	float Price;
 	int Quantity;
 	int Exchanged;
 	int TempExchanged;
@@ -184,12 +185,12 @@ struct AgentCycleResult {
 	bool HasWork = false;
 	bool HasBuy = false;
 	bool HasSell = false;
-	int Profit = 0;
+	float Profit = 0.0f;
 	std::string Job;
 };
 
 struct ItemCycleResult {
-	int PriceFluctuation;
+	float PriceFluctuation;
 	std::string Item;
 };
 

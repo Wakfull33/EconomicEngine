@@ -12,8 +12,8 @@ public:
 
 	
 
-	int sellBelief;
-	std::pair<int, int> buyBelief;
+	float sellBelief;
+	std::pair<float, float> buyBelief;
 
 
 	bool NeededToBuy = false;
