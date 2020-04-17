@@ -41,7 +41,7 @@ void TradeManager::ResolveTrades(){
 						BidsRegistry[it].owner->Inventory[ask.Item] -= ask.Quantity;
 						BidsRegistry[it].Exchanged += ask.Quantity;
 						BidsRegistry[it].Quantity -= ask.Quantity;
-						ask.owner->Inventory[it] += ask.Quantity;
+						ask.owner->Inventory[ask.Item] += ask.Quantity;
 						ask.Exchanged += ask.Quantity;
 						ask.Resolved = true;
 						ask.owner->TradeEnd(true, ask);
