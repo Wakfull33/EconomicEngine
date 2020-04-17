@@ -7,6 +7,7 @@
 Agent::Agent(int _Job)
 	: Job(_Job){
 	//TODO Thomas / Allocate the size and init all the arrays value to 0;
+	Inventory = std::vector<int>(GameMode::Get()->ItemsManager->GetRegistrySize(), 0);
 }
 
 void Agent::DoJob() {
@@ -27,24 +28,22 @@ void Agent::DoJob() {
 			{
 				for (int i = 0; i < agentModel.AgentProd.MaxProd; ++i) 
 				{
-					//TODO Thomas / Not gonna work you push back the id of the item at the end of the inventory and not the quantity at the index of the item;
-					Inventory.push_back(agentModel.AgentProd.Item.Get());
+					Inventory[agentModel.AgentProd.Item.Get()] += agentModel.AgentProd.MaxProd;
 				}	
 			}
 			else if (ressources >= agentModel.AgentConsum.MinConsum)
 			{
 				for (int i = 0; i < agentModel.AgentProd.MinProd; ++i) 
 				{
-					//TODO Thomas / Not gonna work you push back the id of the item at the end of the inventory and not the quantity at the index of the item;
-					Inventory.push_back(agentModel.AgentProd.Item.Get());
-				}	
+					Inventory[agentModel.AgentProd.Item.Get()] += agentModel.AgentProd.MinProd;
+				}
 			}
 			else
 			{
 				PreviousTurnResult.AsWork = false;
+				return;
 			}
 
-			//TODO Thomas / tu testes quand meme si son objet doit etre cassé meme si il a pas travaillé;
 			std::random_device rd;
 			std::mt19937 gen(rd());
 			std::uniform_real_distribution<> dis(0, 1);
@@ -52,7 +51,6 @@ void Agent::DoJob() {
 				Inventory.erase(Inventory.begin() + jobTool.Item + 1);
 
 			Inventory[food] -= 1;
-			//TODO Thomas / regarde 11 lignes au dessus;
 			PreviousTurnResult.AsWork = true;
 		}
 		else
@@ -60,8 +58,7 @@ void Agent::DoJob() {
 			if (ressources >= agentModel.AgentConsum.MinConsum)
 			{
 				Inventory[food] -= 1;
-				//TODO Thomas / tu lui push back son item a nouveau;
-				Inventory.push_back(agentModel.AgentProd.Item.Get());
+				Inventory[agentModel.AgentProd.Item.Get()] += agentModel.AgentProd.MinProd;
 			}
 			else
 			{
@@ -94,8 +91,7 @@ void Agent::DoTrade()
 				GameMode::Get()->TradeManager->RegisterAsk({
 					this,
 					itemConsum,
-					//Todo Thomas / Fais plutot ItemCountNeeded - ItemCount(ItemConsum) car la tu vas te retrouver avec des nombres negatifs
-					ItemCount(itemConsum) - itemCountNeeded,
+					itemCountNeeded - ItemCount(itemConsum),
 					0,
 					false
 				});
@@ -103,7 +99,6 @@ void Agent::DoTrade()
 		}
 		else
 		{
-			//Todo Thomas / meme si il a pas son tool il doit aussi acheter pour sa consommation au prochain tour
 			GameMode::Get()->TradeManager->RegisterAsk({
 				this,
 				agentModel.AgentJobTool.Item,
