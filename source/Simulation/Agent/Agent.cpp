@@ -17,9 +17,9 @@ Agent::Agent(int _Job)
 
 void Agent::DoLife() {
 
-	if (IsDead) {
-		return;
-	}
+	//if (IsDead) {
+	//	return;
+	//}
 	
 	const AgentModel& AgentJobModel = GameMode::Get()->AgentsManager->GetObject(Job);
 	const Production& AgentProduction = AgentJobModel.AgentProd;
@@ -138,8 +138,8 @@ void Agent::DoLife() {
 		else {
 			//TODO find utility for HasWork
 			Inventory[ItemProd] += 1;
-			PreviousTurnResult.HasWork = false;
-			return;
+			//PreviousTurnResult.HasWork = false;
+			//return;
 		}
 
 		std::random_device rd;

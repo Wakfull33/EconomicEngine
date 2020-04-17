@@ -11,6 +11,7 @@ Simulation::~Simulation() {
 	Agents.clear();
 	Events.clear();
 	CyclesEventRegistry.clear();
+	SimulationsResults.clear();
 }
 
 void Simulation::ConsummeCycle() {
