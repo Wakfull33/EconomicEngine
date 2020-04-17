@@ -1,10 +1,4 @@
 {
-    "SimulationConfig": {
-        "NombreCycles": 500,
-        "DataCollected": true,
-        "DataCollectionOccurence": 1,
-        "OutputFile": "../Files/CSV/DataOut.csv"
-    },
     "AgentsInitList": [
         {
             "class": "Farmer",
@@ -26,5 +20,11 @@
             "class": "Blacksmith",
             "quantity": 5
         }
-    ]
+    ],
+    "SimulationConfig": {
+        "DataCollected": true,
+        "DataCollectionOccurence": 1,
+        "NombreCycles": 500,
+        "OutputFile": "../Files/CSV/DataOut.csv"
+    }
 }
