@@ -95,8 +95,8 @@ public:
 				}
 			}
 
-			_Event->AgentsSignal.Connect<ObjectManager<AgentModel>>(&ObjectManager<AgentModel>::UpdateObjectsFromEvent);
-			_Event->ItemsSignal.Connect<ObjectManager<ItemModel>>(&ObjectManager<ItemModel>::UpdateObjectsFromEvent);
+			_Event->AgentsSignal.Connect(SimulationGameMode->AgentsManager, &ObjectManager<AgentModel>::UpdateObjectsFromEvent);
+			_Event->ItemsSignal.Connect(SimulationGameMode->ItemsManager, &ObjectManager<ItemModel>::UpdateObjectsFromEvent);
 			
 			_Simulation->Events.push_back(_Event);
 		}	

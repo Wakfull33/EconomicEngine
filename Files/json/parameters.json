@@ -3,28 +3,28 @@
         "NombreCycles": 500,
         "DataCollected": true,
         "DataCollectionOccurence": 1,
-        "OutputFile": ""
+        "OutputFile": "../Files/CSV/DataOut.csv"
     },
     "AgentsInitList": [
         {
             "class": "Farmer",
-            "quantity": 200
+            "quantity": 5
         },
         {
             "class": "Miner",
-            "quantity": 2
+            "quantity": 5
         },
         {
             "class": "Refiner",
-            "quantity": 2
+            "quantity": 5
         },
         {
             "class": "Woodcutter",
-            "quantity": 2
+            "quantity": 5
         },
         {
             "class": "Blacksmith",
-            "quantity": 2
+            "quantity": 5
         }
     ]
 }

@@ -10,7 +10,50 @@ Agent::Agent(int _Job)
 	PreviousTurnResult.Job = GameMode::Get()->AgentsManager->GetObject(Job).JobName;
 }
 
+void Agent::UpdatePrice() {
 
+	int Gold = GameMode::Get()->ItemsManager->GetObjectIndexByString("Gold");
+	Inventory[Gold] += PreviousTurnResult.Profit;
+	
+	if (PreviousTurnResult.HasBuy) {
+		if (PreviousTurnResult.Profit < 0) {
+			belief.first -= 5;
+			belief.second -= 10;
+		}
+	}
+	else {
+		//He has no offer for his price so he raised it up to match market price
+		if (NeededToBuy) {
+			belief.second += 10;
+			belief.first += 5;
+		}
+
+	}
+
+
+	if (PreviousTurnResult.HasSell) {
+		if (PreviousTurnResult.Profit > 0) {
+			sellBelief += 5;
+		}
+		else {
+			sellBelief -= 5;
+		}
+	}
+	else {
+		sellBelief -= 10;
+	}
+
+	const AgentModel& agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
+	const ItemModel& itemProdModel = GameMode::Get()->ItemsManager->GetObject(agentModel.AgentProd.Item.Get());
+
+	std::clamp(belief.first, 0, belief.second);
+	std::clamp(sellBelief, static_cast<int>(itemProdModel.Price * 0.7), static_cast<int>(itemProdModel.Price * 1.3));
+
+	PreviousTurnResult.HasBuy = false;
+	PreviousTurnResult.HasSell = false;
+	PreviousTurnResult.Profit = 0;
+	NeededToBuy = false;
+}
 
 
 void Agent::DoJob() {
@@ -21,7 +64,7 @@ void Agent::DoJob() {
 	int ressources = ItemCount(agentModel.AgentConsum.Item.Get());
 	bool toolCheck = HasTool(jobTool.Item);
 
-	int food = GameMode::Get()->ItemsManager->GetObjectIndexByString("Food");;
+	int food = GameMode::Get()->ItemsManager->GetObjectIndexByString("Food");
 
 	if (ItemCount(food) > 0)
 	{
@@ -92,6 +135,7 @@ void Agent::DoTrade()
 		{
 			if (ItemCount(itemConsum) < itemCountNeeded)
 			{
+				NeededToBuy = true;
 				GameMode::Get()->TradeManager->RegisterAsk({
 					this,
 					itemConsum,
@@ -103,6 +147,7 @@ void Agent::DoTrade()
 		}
 		else
 		{
+			NeededToBuy = true;
 			GameMode::Get()->TradeManager->RegisterAsk({
 				this,
 				agentModel.AgentJobTool.Item,
@@ -114,6 +159,7 @@ void Agent::DoTrade()
 	}
 	else
 	{
+		NeededToBuy = true;
 		GameMode::Get()->TradeManager->RegisterAsk({
 			this,
 			food,
@@ -132,51 +178,7 @@ void Agent::DoTrade()
 	}
 }
 
-void Agent::UpdatePrice()
-{
-	
-	if(PreviousTurnResult.HasBuy /*TODO add another bool for NeedBuyPrecedentTurn*/)
-	{
-		if (PreviousTurnResult.Profit < 0)
-		{
-			belief.first -= 5;
-			belief.second -= 10;
-		}
-	}
-	else
-	{
-		//He has no offer for his price so he raised it up to match market price
-		belief.second += 10;
-		belief.first += 5;
-	}
 
-	
-	if(PreviousTurnResult.HasSell)
-	{
-		if (PreviousTurnResult.Profit > 0)
-		{
-			sellBelief += 5;
-		}
-		else
-		{
-			sellBelief -= 5;
-		}
-	}
-	else
-	{
-		sellBelief -= 10;
-	}
-
-	const AgentModel& agentModel = GameMode::Get()->AgentsManager->GetObject(Job);
-	const ItemModel& itemProdModel = GameMode::Get()->ItemsManager->GetObject(agentModel.AgentProd.Item.Get());
-
-	std::clamp(belief.first, 0, belief.second);
-	std::clamp(sellBelief, static_cast<int>(itemProdModel.Price * 0.7), static_cast<int>(itemProdModel.Price * 1.3));
-
-
-	//TODO Benoit / Reset la struct de fin de cycle de l'agent en debut du prochain apres que l'agent est tout analysé de son precedent tour
-
-}
 
 int Agent::ItemCount(const int itemWanted)
 {
@@ -192,11 +194,11 @@ void Agent::TradeEnd(bool IsBuyer, TradeModel& Transaction) {
 	
 	const ItemModel& _ItemModel = GameMode::Get()->ItemsManager->GetObject(Transaction.Item);
 	if (IsBuyer) {
-		PreviousTurnResult.AsBuy = true;
+		PreviousTurnResult.HasBuy = true;
 		PreviousTurnResult.Profit -= (_ItemModel.Price*Transaction.Exchanged);
 	}
 	else {
-		PreviousTurnResult.AsSell = true;
+		PreviousTurnResult.HasSell = true;
 		PreviousTurnResult.Profit += (_ItemModel.Price*Transaction.Exchanged);
 	}
 }

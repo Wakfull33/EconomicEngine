@@ -180,14 +180,15 @@ struct TradeModel{
 };
 
 struct AgentCycleResult {
-	bool HasBuy;
-	bool HasSell;
-	int Profit;
+	bool HasWork = false;
+	bool HasBuy = false;
+	bool HasSell = false;
+	int Profit = 0;
 	std::string Job;
 };
 
 struct ItemCycleResult {
-	float PriceFluctuation;
+	int PriceFluctuation;
 	std::string Item;
 };
 

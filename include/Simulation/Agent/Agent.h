@@ -19,7 +19,8 @@ public:
 
 	std::pair<int, int> belief;
 	int sellBelief;
-	
+
+	bool NeededToBuy = false;
 	int Job;
 	AgentCycleResult PreviousTurnResult;
 	std::vector<int> Inventory;

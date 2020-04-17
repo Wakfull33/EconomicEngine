@@ -40,5 +40,8 @@ void CSV::Write(std::vector<CycleResult>& Results, std::string DatasPath) {
 		}
 		csv_File.close();
 	}
+	else {
+		std::cout << "file couldnt be opened" << std::endl;
+	}
 }
 

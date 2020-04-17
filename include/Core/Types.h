@@ -10,11 +10,11 @@ public:
 		: ActualValue(Value){
 	}
 
-	T& Get() const {
+	const T& Get() const {
 		return ActualValue;
 	}
 
-	void Set(T& NewValue) {
+	void Set(const T& NewValue) {
 		if (NewValue != ActualValue) {
 			PrecedentValue = ActualValue;
 			ActualValue = NewValue;

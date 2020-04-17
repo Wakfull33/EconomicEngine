@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+#include <functional>
 
 template<typename ...Args>
 class Signal {
@@ -19,16 +20,14 @@ public:
 		return *this;
 	}
 	template<typename T>
-	int Connect(void(T::*func)(Args...)) {
-		CurrentId++;
-		Slots.insert(std::make_pair(CurrentId, func));
-		return CurrentId;
+	int Connect(T* Instance, void(T::*func)(Args...)) {
+		return Connect([=](Args... _args) {
+			(Instance->*func)(_args...);
+		});
 	}
 
-	template<typename T>
-	int Connect(void(*func)(Args...)) {
-		CurrentId++;
-		Slots.insert(std::make_pair(CurrentId, func));
+	int Connect(const std::function<void(Args...)>& _slot) const{
+		Slots.insert({ ++CurrentId, _slot });
 		return CurrentId;
 	}
 	
@@ -47,7 +46,7 @@ public:
 	}
 	
 private:
-	std::map<int, void(*)(Args...)> Slots;
-	int CurrentId;
+	mutable std::map<int, std::function<void(Args...)>> Slots;
+	mutable int CurrentId;
 };
 
