@@ -3,11 +3,11 @@
 #include "Simulation/Global/GameMode.h"
 #include "Core/StructUtils.h"
 
-void TradeManager::RegisterBid(TradeModel& trade) {
+void TradeManager::RegisterBid(const TradeModel& trade) {
 	BidsRegistry.push_back(trade);
 }
 
-void TradeManager::RegisterAsk(TradeModel& trade) {
+void TradeManager::RegisterAsk(const TradeModel& trade) {
 	AsksRegistry.push_back(trade);
 }
 

@@ -40,6 +40,7 @@ void Simulation::ConsummeCycle() {
 			SimulationsResults[ActualCycle/DataCollectionOccurence]._AgentCycleResult.push_back(Agent->PreviousTurnResult);
 		}
 		Agent->DoJob();
+		Agent->DoTrade();
 	}
 	
 	if (GetCycleData) {

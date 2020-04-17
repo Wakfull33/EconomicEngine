@@ -9,9 +9,9 @@ class TradeManager {
 public:
 	TradeManager() = default;
 
-	void RegisterBid(TradeModel& trade);
+	void RegisterBid(const TradeModel& trade);
 
-	void RegisterAsk(TradeModel& trade);
+	void RegisterAsk(const TradeModel& trade);
 
 	void ResolveTrades();
 	
