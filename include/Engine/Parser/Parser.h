@@ -49,15 +49,23 @@ public:
 
 	static void CreateSimulationObjects(Simulation* _Simulation, DataModel& Model) {
 		GameMode* SimulationGameMode = GamePlayStatics::GetGameMode();
-		
+
+		const int GoldIndex = SimulationGameMode->ItemsManager->GetObjectIndexByString("Gold");
+		const int FoodIndex = SimulationGameMode->ItemsManager->GetObjectIndexByString("Food");
 		for (auto& NbrAgent : Model.NbrAgentsPerModels) {
 			auto Registry = SimulationGameMode->AgentsManager->GetRegistry();
 			auto iterator = std::find(Registry.begin(), Registry.end(), NbrAgent.first);
-			const int GoldIndex = SimulationGameMode->ItemsManager->GetObjectIndexByString("Gold");
 			if (iterator != Registry.end()) {
+				const int ProductionItemIndex = iterator->AgentProd.Item.Get();
+				const int ConsummeItemIndex = iterator->AgentConsum.Item.Get();
+				const int JobToolItemIndex = iterator->AgentJobTool.Item;
 				for (int i = 0; i < NbrAgent.second; i++) {
 					Agent* _Agent = new Agent(iterator - Registry.begin());
 					_Agent->Inventory[GoldIndex] = iterator->StartGold;
+					_Agent->Inventory[FoodIndex] = 2;
+					_Agent->Inventory[ProductionItemIndex] = iterator->AgentProd.MaxProd * 2;
+					_Agent->Inventory[ConsummeItemIndex] = iterator->AgentConsum.MaxConsum * 2;
+					_Agent->Inventory[JobToolItemIndex] = 1;
 					_Simulation->Agents.push_back(_Agent);
 				}
 			}	

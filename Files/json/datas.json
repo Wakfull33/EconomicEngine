@@ -3,14 +3,14 @@
         {
             "consume": {
                 "item": 3,
-                "max": 2,
-                "min": 1
+                "max": 3,
+                "min": 2
             },
             "job": "Farmer",
             "produce": {
                 "item": 2,
-                "max": 4,
-                "min": 2
+                "max": 6,
+                "min": 3
             },
             "startGold": 500,
             "tool": {
@@ -21,14 +21,14 @@
         {
             "consume": {
                 "item": 3,
-                "max": 2,
-                "min": 1
+                "max": 3,
+                "min": 2
             },
             "job": "Miner",
             "produce": {
                 "item": 4,
-                "max": 4,
-                "min": 2
+                "max": 6,
+                "min": 3
             },
             "startGold": 500,
             "tool": {
@@ -45,7 +45,7 @@
             "job": "Refiner",
             "produce": {
                 "item": 5,
-                "max": 4,
+                "max": 3,
                 "min": 2
             },
             "startGold": 500,
@@ -57,14 +57,14 @@
         {
             "consume": {
                 "item": 3,
-                "max": 2,
-                "min": 1
+                "max": 3,
+                "min": 2
             },
             "job": "Woodcutter",
             "produce": {
                 "item": 3,
-                "max": 4,
-                "min": 2
+                "max": 6,
+                "min": 3
             },
             "startGold": 500,
             "tool": {
@@ -75,14 +75,14 @@
         {
             "consume": {
                 "item": 5,
-                "max": 4,
-                "min": 2
+                "max": 2,
+                "min": 1
             },
             "job": "Blacksmith",
             "produce": {
                 "item": 6,
-                "max": 8,
-                "min": 4
+                "max": 2,
+                "min": 1
             },
             "startGold": 500,
             "tool": {
@@ -109,11 +109,11 @@
         },
         {
             "ItemName": "wood",
-            "ItemPrice": 2
+            "ItemPrice": 5
         },
         {
             "ItemName": "ore",
-            "ItemPrice": 7
+            "ItemPrice": 5
         },
         {
             "ItemName": "metal",

@@ -176,6 +176,7 @@ struct TradeModel{
 	int Item;
 	int Quantity;
 	int Exchanged;
+	int TempExchanged;
 	bool Resolved;
 };
 

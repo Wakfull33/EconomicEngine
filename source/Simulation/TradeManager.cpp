@@ -27,26 +27,37 @@ void TradeManager::ResolveTrades(){
 				{
 					if (ask.Quantity >= BidsRegistry[it].Quantity)
 					{
-						ask.Quantity -= BidsRegistry[it].Quantity;
 						ask.Exchanged += BidsRegistry[it].Quantity;
+						BidsRegistry[it].Exchanged += BidsRegistry[it].Quantity;
+
+						ask.TempExchanged = BidsRegistry[it].Quantity;
+						BidsRegistry[it].TempExchanged = BidsRegistry[it].Quantity;
+
 						ask.owner->Inventory[ask.Item] += BidsRegistry[it].Quantity;
 						BidsRegistry[it].owner->Inventory[ask.Item] -= BidsRegistry[it].Quantity;
-						BidsRegistry[it].Exchanged = BidsRegistry[it].Quantity;
+						
 						BidsRegistry[it].Resolved = true;
-						ask.owner->TradeEnd(true, ask);
-						BidsRegistry[it].owner->TradeEnd(false, BidsRegistry[it]);
+
 					}
 					else
 					{
-						BidsRegistry[it].owner->Inventory[ask.Item] -= ask.Quantity;
-						BidsRegistry[it].Exchanged += ask.Quantity;
-						BidsRegistry[it].Quantity -= ask.Quantity;
-						ask.owner->Inventory[ask.Item] += ask.Quantity;
 						ask.Exchanged += ask.Quantity;
+						BidsRegistry[it].Exchanged += ask.Quantity;
+
+						ask.TempExchanged = ask.Quantity;
+						BidsRegistry[it].TempExchanged = ask.Quantity;
+						
+						ask.owner->Inventory[ask.Item] += ask.Quantity;
+						BidsRegistry[it].owner->Inventory[ask.Item] -= ask.Quantity;
+
 						ask.Resolved = true;
-						ask.owner->TradeEnd(true, ask);
-						BidsRegistry[it].owner->TradeEnd(false, BidsRegistry[it]);
+						
 					}
+					ask.Quantity -= ask.Exchanged;
+					BidsRegistry[it].Quantity -= BidsRegistry[it].Exchanged;
+					//Trade End
+					ask.owner->TradeEnd(true, ask);
+					BidsRegistry[it].owner->TradeEnd(false, BidsRegistry[it]);
 				}
 				++it;
 			}
