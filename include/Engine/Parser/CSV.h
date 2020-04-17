@@ -14,6 +14,8 @@ public:
 
 	static void Write(std::vector<CycleResult>& Results, std::string DatasPath);
 
+	static std::string BoolToString(bool value);
+
 	
 private:
 
