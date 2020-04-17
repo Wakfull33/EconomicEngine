@@ -40,7 +40,7 @@ void Agent::DoJob() {
 			}
 			else
 			{
-				PreviousTurnResult.AsWork = false;
+				PreviousTurnResult.HasWork = false;
 				return;
 			}
 
@@ -51,7 +51,7 @@ void Agent::DoJob() {
 				Inventory.erase(Inventory.begin() + jobTool.Item + 1);
 
 			Inventory[food] -= 1;
-			PreviousTurnResult.AsWork = true;
+			PreviousTurnResult.HasWork = true;
 		}
 		else
 		{
@@ -62,14 +62,14 @@ void Agent::DoJob() {
 			}
 			else
 			{
-				PreviousTurnResult.AsWork = false;
+				PreviousTurnResult.HasWork = false;
 			}
 		}
 	}
 	else
 	{
 		//Todo Thomas / Il devrait crever plutot ou a la rigueur il doit perdre autre chose
-		PreviousTurnResult.AsWork = false;
+		PreviousTurnResult.HasWork = false;
 	}
 }
 
@@ -126,6 +126,11 @@ void Agent::DoTrade()
 			this, itemProd, ItemCount(itemProd),0, false
 		});
 	}
+}
+
+void Agent::UpdatePrice()
+{
+	if (true);
 }
 
 int Agent::ItemCount(const int itemWanted)

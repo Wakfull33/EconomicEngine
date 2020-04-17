@@ -168,8 +168,9 @@ struct TradeModel{
 };
 
 struct AgentCycleResult {
-	bool AsWork;
-	bool AsTrade;
+	bool HasWork;
+	bool HasBuy;
+	bool HasSell;
 	int Profit;
 	std::string Job;
 };
