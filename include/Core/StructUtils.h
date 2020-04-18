@@ -169,6 +169,7 @@ struct DataModel {
 	std::vector<EventModel> EventModels;
 	std::vector<std::pair<std::string, int>> NbrAgentsPerModels;
 
+
 };
 
 struct TradeModel{

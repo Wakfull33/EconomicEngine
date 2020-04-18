@@ -1,4 +1,7 @@
 #include "Engine/Parser/CSV.h"
+#include "Simulation/Global/GameMode.h"
+#include "Core/StructUtils.h"
+
 #include <fstream>
 
 
@@ -15,28 +18,24 @@ bool CSV::IsFileValid(std::string FileName) {
 	return false;
 }
 
-std::string CSV::BoolToString(bool value)
-{
-	return value == true ? "True" : "False";
-}
-
 
 void CSV::Write(std::vector<CycleResult>& Results, std::string DatasPath)
 {
-	WriteProfit(Results, DatasPath);
-	WriteMoney(Results, DatasPath);
-	WriteItemProd(Results, DatasPath);
-	WriteItemConsum(Results, DatasPath);
-	WriteFood(Results, DatasPath);
+	std::string columns = GetJobColumns();
+	WriteProfit(Results, DatasPath, columns);
+	WriteMoney(Results, DatasPath, columns);
+	WriteItemProd(Results, DatasPath, columns);
+	WriteItemConsum(Results, DatasPath, columns);
+	WriteFood(Results, DatasPath, columns);
 }
 
-void CSV::WriteProfit(std::vector<CycleResult>& Results, std::string DatasPath) {
+void CSV::WriteProfit(std::vector<CycleResult>& Results, std::string DatasPath, std::string Columns) {
 	std::ofstream csv_File;
 	csv_File.open(DatasPath += "profit.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "Profit :" << std::endl;
-		csv_File << "Cycle, Farmer, Miner, Refiner, WoodCutter, Blacksmith" << std::endl;
+		csv_File << "Profit moyen par métier :" << std::endl;
+		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
 			int jobCount = 0;
@@ -69,13 +68,13 @@ void CSV::WriteProfit(std::vector<CycleResult>& Results, std::string DatasPath) 
 	}
 }
 
-void CSV::WriteMoney(std::vector<CycleResult>& Results, std::string DatasPath) {
+void CSV::WriteMoney(std::vector<CycleResult>& Results, std::string DatasPath, std::string Columns) {
 	std::ofstream csv_File;
 	csv_File.open(DatasPath += "money.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "Money :" << std::endl;
-		csv_File << "Cycle, Farmer, Miner, Refiner, WoodCutter, Blacksmith" << std::endl;
+		csv_File << "Argent moyen par métier :" << std::endl;
+		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
 			int jobCount = 0;
@@ -108,13 +107,13 @@ void CSV::WriteMoney(std::vector<CycleResult>& Results, std::string DatasPath) {
 	}
 }
 
-void CSV::WriteItemProd(std::vector<CycleResult>& Results, std::string DatasPath) {
+void CSV::WriteItemProd(std::vector<CycleResult>& Results, std::string DatasPath, std::string Columns) {
 	std::ofstream csv_File;
 	csv_File.open(DatasPath += "production.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "ItemProd :" << std::endl;
-		csv_File << "Cycle, Farmer, Miner, Refiner, WoodCutter, Blacksmith" << std::endl;
+		csv_File << "Produits moyens par métier :" << std::endl;
+		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
 			int jobCount = 0;
@@ -147,13 +146,13 @@ void CSV::WriteItemProd(std::vector<CycleResult>& Results, std::string DatasPath
 	}
 }
 
-void CSV::WriteItemConsum(std::vector<CycleResult>& Results, std::string DatasPath) {
+void CSV::WriteItemConsum(std::vector<CycleResult>& Results, std::string DatasPath, std::string Columns) {
 	std::ofstream csv_File;
 	csv_File.open(DatasPath += "consummation.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "ItemConsum :" << std::endl;
-		csv_File << "Cycle, Farmer, Miner, Refiner, WoodCutter, Blacksmith" << std::endl;
+		csv_File << "Ressources moyennes par métier :" << std::endl;
+		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
 			int jobCount = 0;
@@ -186,13 +185,13 @@ void CSV::WriteItemConsum(std::vector<CycleResult>& Results, std::string DatasPa
 	}
 }
 
-void CSV::WriteFood(std::vector<CycleResult>& Results, std::string DatasPath) {
+void CSV::WriteFood(std::vector<CycleResult>& Results, std::string DatasPath, std::string Columns) {
 	std::ofstream csv_File;
 	csv_File.open(DatasPath += "food.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "Food :" << std::endl;
-		csv_File << "Cycle, Farmer, Miner, Refiner, WoodCutter, Blacksmith" << std::endl;
+		csv_File << "Nourriture moyenne par métier:" << std::endl;
+		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
 			int jobCount = 0;
@@ -223,4 +222,16 @@ void CSV::WriteFood(std::vector<CycleResult>& Results, std::string DatasPath) {
 	else {
 		std::cout << "file couldnt be opened" << std::endl;
 	}
+}
+
+std::string CSV::GetJobColumns()
+{
+	std::string output = "Cycle";
+
+	for(int i = 0; i < GameMode::Get()->AgentsManager->GetRegistrySize(); ++i)
+	{
+		output += ", " + GameMode::Get()->AgentsManager->GetObject(i).JobName;
+	}
+
+	return output;
 }
