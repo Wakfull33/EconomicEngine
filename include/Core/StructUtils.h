@@ -188,6 +188,8 @@ struct AgentCycleResult {
 	float Profit = 0.0f;
 	int Money = 0;
 	int ItemProd = 0;
+	int ItemConsum = 0;
+	int Food = 0;
 	std::string Job;
 };
 

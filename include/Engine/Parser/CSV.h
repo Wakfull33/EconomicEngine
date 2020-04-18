@@ -16,6 +16,8 @@ public:
 	static void WriteProfit(std::vector<CycleResult>& Results, std::string DatasPath);
 	static void WriteMoney(std::vector<CycleResult>& Results, std::string DatasPath);
 	static void WriteItemProd(std::vector<CycleResult>& Results, std::string DatasPath);
+	static void WriteItemConsum(std::vector<CycleResult>& Results, std::string DatasPath);
+	static void WriteFood(std::vector<CycleResult>& Results, std::string DatasPath);
 
 	static std::string BoolToString(bool value);
 
