@@ -1,0 +1,233 @@
+{
+    "AgentTypes": [
+        {
+            "consume": {
+                "item": 3,
+                "max": 3,
+                "min": 2
+            },
+            "job": "Farmer",
+            "produce": {
+                "item": 2,
+                "max": 6,
+                "min": 3
+            },
+            "startGold": 500,
+            "tool": {
+                "breaking": 0.1,
+                "item": 6
+            }
+        },
+        {
+            "consume": {
+                "item": 3,
+                "max": 3,
+                "min": 2
+            },
+            "job": "Miner",
+            "produce": {
+                "item": 4,
+                "max": 6,
+                "min": 3
+            },
+            "startGold": 500,
+            "tool": {
+                "breaking": 0.1,
+                "item": 6
+            }
+        },
+        {
+            "consume": {
+                "item": 4,
+                "max": 2,
+                "min": 1
+            },
+            "job": "Refiner",
+            "produce": {
+                "item": 5,
+                "max": 3,
+                "min": 2
+            },
+            "startGold": 500,
+            "tool": {
+                "breaking": 0.1,
+                "item": 6
+            }
+        },
+        {
+            "consume": {
+                "item": 3,
+                "max": 3,
+                "min": 2
+            },
+            "job": "Woodcutter",
+            "produce": {
+                "item": 3,
+                "max": 6,
+                "min": 3
+            },
+            "startGold": 500,
+            "tool": {
+                "breaking": 0.1,
+                "item": 6
+            }
+        },
+        {
+            "consume": {
+                "item": 5,
+                "max": 2,
+                "min": 1
+            },
+            "job": "Blacksmith",
+            "produce": {
+                "item": 6,
+                "max": 2,
+                "min": 1
+            },
+            "startGold": 500,
+            "tool": {
+                "breaking": 0.01,
+                "item": 6
+            }
+        }
+    ],
+  "Events": [
+    {
+      "AgentTypesImpacted": [
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 3
+          },
+          "JobImpacted": "Farmer",
+          "ProductionOffset": {
+            "MaxOffset": -2,
+            "MinOffset": -1,
+            "item": 2
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        },
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 3
+          },
+          "JobImpacted": "Miner",
+          "ProductionOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 4
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        },
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 1,
+            "MinOffset": 0,
+            "item": 4
+          },
+          "JobImpacted": "Refiner",
+          "ProductionOffset": {
+            "MaxOffset": 1,
+            "MinOffset": 0,
+            "item": 5
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        },
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 5
+          },
+          "JobImpacted": "Blacksmith",
+          "ProductionOffset": {
+            "MaxOffset": 5,
+            "MinOffset": 0,
+            "item": 6
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 0
+          }
+        }
+      ],
+      "EventCycleOccurence": 100,
+      "EventCyclesSpacing": 0,
+      "EventDuration": 50,
+      "EventIsRecurrent": false,
+      "EventIsTemporary": true,
+      "EventName": "War",
+      "ItemsImpacted": []
+    },
+    {
+      "AgentTypesImpacted": [
+        {
+          "ConsumeOffset": {
+            "MaxOffset": 0,
+            "MinOffset": 0,
+            "item": 0
+          },
+          "JobImpacted": "WoodCutter",
+          "ProductionOffset": {
+            "MaxOffset": -6,
+            "MinOffset": -6,
+            "item": 3
+          },
+          "ToolOffset": {
+            "BreakingOffset": 0,
+            "item": 6
+          }
+        }
+      ],
+      "EventCycleOccurence": 10,
+      "EventCyclesSpacing": 0,
+      "EventDuration": 2,
+      "EventIsRecurrent": false,
+      "EventIsTemporary": true,
+      "EventName": "NoWood",
+      "ItemsImpacted": []
+    }
+  ],
+    "ItemTypes": [
+        {
+            "ItemName": "None",
+            "ItemPrice": 0
+        },
+        {
+            "ItemName": "Gold",
+            "ItemPrice": 1
+        },
+        {
+            "ItemName": "Food",
+            "ItemPrice": 2
+        },
+        {
+            "ItemName": "wood",
+            "ItemPrice": 4
+        },
+        {
+            "ItemName": "ore",
+            "ItemPrice": 6
+        },
+        {
+            "ItemName": "metal",
+            "ItemPrice": 10
+        },
+        {
+            "ItemName": "tool",
+            "ItemPrice": 12
+        }
+    ]
+}
