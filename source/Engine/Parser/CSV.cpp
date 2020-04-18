@@ -34,7 +34,7 @@ void CSV::WriteProfit(std::vector<CycleResult>& Results, std::string DatasPath, 
 	csv_File.open(DatasPath += "profit.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "Profit :" << std::endl;
+		csv_File << "Profit moyen par métier :" << std::endl;
 		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
@@ -73,7 +73,7 @@ void CSV::WriteMoney(std::vector<CycleResult>& Results, std::string DatasPath, s
 	csv_File.open(DatasPath += "money.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "Money :" << std::endl;
+		csv_File << "Argent moyen par métier :" << std::endl;
 		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
@@ -112,7 +112,7 @@ void CSV::WriteItemProd(std::vector<CycleResult>& Results, std::string DatasPath
 	csv_File.open(DatasPath += "production.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "ItemProd :" << std::endl;
+		csv_File << "Produits moyens par métier :" << std::endl;
 		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
@@ -151,7 +151,7 @@ void CSV::WriteItemConsum(std::vector<CycleResult>& Results, std::string DatasPa
 	csv_File.open(DatasPath += "consummation.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "ItemConsum :" << std::endl;
+		csv_File << "Ressources moyennes par métier :" << std::endl;
 		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
@@ -190,7 +190,7 @@ void CSV::WriteFood(std::vector<CycleResult>& Results, std::string DatasPath, st
 	csv_File.open(DatasPath += "food.csv");
 	if (csv_File.is_open()) {
 		csv_File << "Resultats des agents :" << std::endl;
-		csv_File << "Food :" << std::endl;
+		csv_File << "Nourriture moyenne par métier:" << std::endl;
 		csv_File << Columns << std::endl;
 		for (int i = 0; i < Results.size(); ++i) {
 			csv_File << i + 1;
