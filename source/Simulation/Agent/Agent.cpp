@@ -201,6 +201,7 @@ void Agent::DoLife() {
 }
 
 void Agent::TradeEnd(bool IsBuyer, TradeModel& Transaction) {
+	const auto ItemProd = GameMode::Get()->AgentsManager->GetObject(Transaction.owner->Job).AgentProd.Item.Get();
 	const ItemModel& _ItemModel = GameMode::Get()->ItemsManager->GetObject(Transaction.Item);
 	if (IsBuyer) {
 		PreviousTurnResult.HasBuy = true;
@@ -210,6 +211,8 @@ void Agent::TradeEnd(bool IsBuyer, TradeModel& Transaction) {
 		PreviousTurnResult.HasSell = true;
 		PreviousTurnResult.Profit += Transaction.Price* Transaction.TempExchanged;
 	}
+	PreviousTurnResult.Money = Transaction.owner->Inventory[1];
+	PreviousTurnResult.ItemProd = Transaction.owner->Inventory[ItemProd];
 }
 
 int Agent::ItemCount(const int itemWanted) {

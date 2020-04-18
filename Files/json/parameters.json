@@ -24,7 +24,7 @@
     "SimulationConfig": {
         "DataCollected": true,
         "DataCollectionOccurence": 1,
-        "NombreCycles": 200,
-        "OutputFile": "../Files/CSV/DataOut.csv"
+        "NombreCycles": 50,
+        "OutputFile": "../Files/CSV/"
     }
 }

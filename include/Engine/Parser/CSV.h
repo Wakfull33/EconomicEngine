@@ -13,6 +13,9 @@ public:
 	static bool IsFileValid(std::string FileName);
 
 	static void Write(std::vector<CycleResult>& Results, std::string DatasPath);
+	static void WriteProfit(std::vector<CycleResult>& Results, std::string DatasPath);
+	static void WriteMoney(std::vector<CycleResult>& Results, std::string DatasPath);
+	static void WriteItemProd(std::vector<CycleResult>& Results, std::string DatasPath);
 
 	static std::string BoolToString(bool value);
 
