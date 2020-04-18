@@ -12,7 +12,6 @@ void TradeManager::RegisterAsk(const TradeModel& trade) {
 }
 
 void TradeManager::ResolveTrades(){
-	//TODO update because belief as change
 	for (auto& ask : AsksRegistry)
 	{
 		

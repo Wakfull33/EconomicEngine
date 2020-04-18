@@ -12,6 +12,7 @@ Simulation::~Simulation() {
 	Events.clear();
 	CyclesEventRegistry.clear();
 	SimulationsResults.clear();
+	
 }
 
 void Simulation::ConsummeCycle() {

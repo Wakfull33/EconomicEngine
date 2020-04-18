@@ -136,10 +136,7 @@ void Agent::DoLife() {
 			Inventory[ItemConsum] -= AgentConsum.MinConsum;
 		}
 		else {
-			//TODO find utility for HasWork
 			Inventory[ItemProd] += 1;
-			//PreviousTurnResult.HasWork = false;
-			//return;
 		}
 
 		std::random_device rd;

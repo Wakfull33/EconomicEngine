@@ -10,7 +10,8 @@ class GameMode {
 public:
 
 	static GameMode* Get();
-
+	static void Destroy();
+	
 	unsigned int NbrCycles = 0;
 	ObjectManager<AgentModel>* AgentsManager = nullptr;
 	ObjectManager<ItemModel>* ItemsManager = nullptr;
@@ -20,6 +21,7 @@ public:
 private:
 
 	GameMode() = default;
+	~GameMode();
 
 	static GameMode* m_GameMode;
 	

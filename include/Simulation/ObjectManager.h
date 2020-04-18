@@ -6,6 +6,9 @@ class ObjectManager {
 	
 public:
 	ObjectManager() = default;
+	~ObjectManager() {
+		ObjectRegistry.clear();
+	};
 
 	void Register(T& NewObject) {
 		const auto it = std::find(ObjectRegistry.begin(), ObjectRegistry.end(), NewObject);

@@ -8,3 +8,13 @@ GameMode* GameMode::Get() {
 	}
 	return m_GameMode;
 }
+
+void GameMode::Destroy() {
+	delete m_GameMode;
+}
+
+GameMode::~GameMode() {
+	delete AgentsManager;
+	delete ItemsManager;
+	delete TradeManager;
+}
