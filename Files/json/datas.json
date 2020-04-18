@@ -211,15 +211,15 @@
         },
         {
             "ItemName": "Food",
-            "ItemPrice": 5
+            "ItemPrice": 2
         },
         {
             "ItemName": "wood",
-            "ItemPrice": 5
+            "ItemPrice": 4
         },
         {
             "ItemName": "ore",
-            "ItemPrice": 5
+            "ItemPrice": 6
         },
         {
             "ItemName": "metal",
