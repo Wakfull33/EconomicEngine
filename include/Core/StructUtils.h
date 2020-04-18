@@ -186,6 +186,8 @@ struct AgentCycleResult {
 	bool HasBuy = false;
 	bool HasSell = false;
 	float Profit = 0.0f;
+	int Money = 0;
+	int ItemProd = 0;
 	std::string Job;
 };
 
