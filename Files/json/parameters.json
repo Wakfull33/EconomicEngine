@@ -10,7 +10,7 @@
         },
         {
             "class": "Refiner",
-						"quantity": 3
+	    "quantity": 3
         },
         {
             "class": "Woodcutter",
@@ -24,7 +24,7 @@
     "SimulationConfig": {
         "DataCollected": true,
         "DataCollectionOccurence": 1,
-      "NombreCycles": 200,
+        "NombreCycles": 200,
         "OutputFile": "../Files/CSV/"
     }
 }
