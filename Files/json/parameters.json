@@ -2,7 +2,7 @@
     "AgentsInitList": [
         {
             "class": "Farmer",
-            "quantity": 11
+            "quantity": 15
         },
         {
             "class": "Miner",
@@ -14,7 +14,7 @@
         },
         {
             "class": "Woodcutter",
-            "quantity": 12
+            "quantity": 14
         },
         {
             "class": "Blacksmith",
